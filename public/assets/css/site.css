@@ -458,6 +458,10 @@ body.no-hero .site-header.is-solid { height: 68px; }
     /* Header sempre com fundo no mobile para legibilidade da marca */
     .site-header { background: rgba(1,7,31,.96); height: var(--header-h); }
 
+    /* ----- Respiro lateral consistente no mobile ----- */
+    .container { padding-inline: 22px; }
+    .diff-grid, .mvv, .steps, .services-grid, .proj-editorial, .channels { gap: 16px; }
+
     /* ----- Tipografia mais contida no mobile ----- */
     .section { padding-block: 56px; }
     .section-head { margin-bottom: 34px; }
