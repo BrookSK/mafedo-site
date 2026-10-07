@@ -18,7 +18,7 @@
 
 <!-- ABORDAGEM: texto + imagem de projeto -->
 <section class="section section--soft blueprint">
-    <div class="container split">
+    <div class="container split split--text-first">
         <figure class="split__media reveal ticked">
             <img src="<?= e(asset('images/site/about-approach.jpg')) ?>" alt="Profissional da Mafedo desenvolvendo projeto" loading="lazy">
         </figure>
