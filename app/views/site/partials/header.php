@@ -19,10 +19,10 @@ $isActive = static function (string $href) use ($path): string {
     <div class="container">
         <a class="brand" href="<?= e(url('/')) ?>" aria-label="<?= e($companyName) ?> — página inicial">
             <?php if ($logo !== ''): ?>
-                <img src="<?= e(upload_url($logo)) ?>" alt="<?= e($companyName) ?>">
+                <img src="<?= e(upload_url($logo)) ?>" alt="<?= e($companyName) ?>" class="brand__img">
             <?php else: ?>
-                <img src="<?= e(asset('images/brand/logo-azul.png')) ?>" alt="<?= e($companyName) ?>" class="brand__mark">
-                <span class="brand__word">Mafedo<em>engenharia</em></span>
+                <span class="brand__word">MAFEDO<span class="brand__dot">.</span></span>
+                <span class="brand__tag">ENGENHARIA</span>
             <?php endif; ?>
         </a>
 

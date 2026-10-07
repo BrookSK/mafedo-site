@@ -118,16 +118,20 @@ p { margin: 0 0 1em; }
     box-shadow: 0 1px 0 rgba(255,255,255,.06);
     height: 68px;
 }
-.brand { display: inline-flex; align-items: center; gap: 12px; color: #fff; }
-.brand span { color: var(--orange); }
-.brand > img { height: 44px; width: auto; }
-.brand__mark { height: 42px; width: 42px; object-fit: contain; flex: none; }
+/* Lockup da marca: wordmark tipográfico + tagline fina, alinhado verticalmente */
+.brand { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; color: #fff; line-height: 1; }
+.brand__img { height: 48px; width: auto; }
 .brand__word {
-    font-family: var(--font-head); font-weight: 600; font-size: 1.28rem;
-    line-height: 1; letter-spacing: .01em; color: #fff; display: inline-flex; align-items: baseline; gap: .35em;
+    font-family: var(--font-head); font-weight: 700; font-size: 1.55rem;
+    line-height: 1; letter-spacing: .04em; color: #fff;
 }
-.brand__word em { font-style: normal; font-weight: 400; font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--orange); }
-.footer-brand .brand__word { color: #fff; }
+.brand__dot { color: var(--orange); }
+.brand__tag {
+    font-family: var(--font-head); font-weight: 500; font-size: .62rem;
+    letter-spacing: .42em; text-transform: uppercase; color: var(--orange);
+    align-self: stretch; text-align: right;
+}
+.site-header.is-solid .brand__word { font-size: 1.42rem; }
 
 .nav { display: flex; align-items: center; gap: 34px; }
 .nav a {
@@ -337,8 +341,12 @@ p { margin: 0 0 1em; }
 .site-footer a { color: #c3cde0; transition: color .2s; }
 .site-footer a:hover { color: var(--orange); }
 .footer-links { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.footer-brand .brand { color: #fff; margin-bottom: 16px; }
+.footer-brand .brand { color: #fff; margin-bottom: 20px; }
+.footer-brand .brand__word { font-size: 1.7rem; }
 .footer-desc { max-width: 34ch; font-size: .95rem; color: #9fb0cf; }
+.footer-cta-link { color: var(--orange) !important; font-family: var(--font-head); font-weight: 500; }
+.footer-cta-link:hover { color: #fff !important; }
+.footer-col h4 { margin-top: 6px; }
 .socials { display: flex; gap: 12px; margin-top: 20px; }
 .socials a { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.15); border-radius: 0; display: grid; place-items: center; font-size: .85rem; font-family: var(--font-head); transition: background .2s, border-color .2s; }
 .socials a:hover { background: var(--orange); color: #fff; border-color: var(--orange); }
