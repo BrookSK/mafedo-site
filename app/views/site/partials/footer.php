@@ -19,7 +19,10 @@ $footerServices = array_slice($footerServices, 0, 5);
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <a class="brand" href="<?= e(url('/')) ?>">MAFEDO<span>.</span></a>
+                <a class="brand" href="<?= e(url('/')) ?>">
+                    <img src="<?= e(asset('images/brand/logo-azul.png')) ?>" alt="<?= e($companyName) ?>" class="brand__mark">
+                    <span class="brand__word">Mafedo<em>engenharia</em></span>
+                </a>
                 <p class="footer-desc">Engenharia com rigor técnico, segurança e capacidade de execução para transformar projetos em resultados.</p>
                 <?php if (array_filter($socials)): ?>
                     <div class="socials">

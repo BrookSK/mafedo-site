@@ -6,7 +6,7 @@
         <?php if (!empty($hero['image'])): ?>
             <img src="<?= e(upload_url($hero['image'])) ?>" alt="" fetchpriority="high">
         <?php else: ?>
-            <img src="<?= e(asset('images/placeholder.svg')) ?>" alt="">
+            <img src="<?= e(asset('images/projetos/hero-torres.jpg')) ?>" alt="" fetchpriority="high">
         <?php endif; ?>
     </div>
     <div class="hero__overlay"></div>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="split__media reveal" data-delay="1">
-            <img src="<?= e(upload_url(Setting::get('home_hero_image') ?: null)) ?>" alt="Atuação da Mafedo Engenharia" loading="lazy">
+            <img src="<?= e(Setting::get('home_hero_image') ? upload_url((string) Setting::get('home_hero_image')) : asset('images/projetos/comercial.jpg')) ?>" alt="Atuação da Mafedo Engenharia" loading="lazy">
         </div>
     </div>
 </section>

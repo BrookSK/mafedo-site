@@ -21,7 +21,8 @@ $isActive = static function (string $href) use ($path): string {
             <?php if ($logo !== ''): ?>
                 <img src="<?= e(upload_url($logo)) ?>" alt="<?= e($companyName) ?>">
             <?php else: ?>
-                MAFEDO<span>.</span>
+                <img src="<?= e(asset('images/brand/logo-azul.png')) ?>" alt="<?= e($companyName) ?>" class="brand__mark">
+                <span class="brand__word">Mafedo<em>engenharia</em></span>
             <?php endif; ?>
         </a>
 

@@ -13,7 +13,7 @@
 <section class="section section--soft" style="padding-top:0; background:transparent">
     <div class="container split">
         <div class="split__media reveal">
-            <img src="<?= e(asset('images/placeholder.svg')) ?>" alt="Atuação da Mafedo" loading="lazy">
+            <img src="<?= e(asset('images/projetos/infraestrutura.jpg')) ?>" alt="Atuação da Mafedo" loading="lazy">
         </div>
         <div class="split__content reveal" data-delay="1">
             <p class="eyebrow">Nosso propósito</p>

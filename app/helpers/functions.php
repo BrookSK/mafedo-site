@@ -60,6 +60,10 @@ if (!function_exists('upload_url')) {
         if (str_starts_with($file, 'http://') || str_starts_with($file, 'https://')) {
             return $file;
         }
+        // Caminho absoluto da aplicação (ex.: '/assets/...') — serve direto.
+        if (str_starts_with($file, '/')) {
+            return base_url() . $file;
+        }
         return base_url() . rtrim((string) Config::get('uploads_url', '/uploads'), '/') . '/' . ltrim($file, '/');
     }
 }
@@ -95,12 +99,26 @@ if (!function_exists('slugify')) {
     function slugify(string $text): string
     {
         $text = trim($text);
+
+        // Transliteração confiável de acentos (independe do iconv do servidor).
+        $map = [
+            'á'=>'a','à'=>'a','ã'=>'a','â'=>'a','ä'=>'a','Á'=>'a','À'=>'a','Ã'=>'a','Â'=>'a','Ä'=>'a',
+            'é'=>'e','è'=>'e','ê'=>'e','ë'=>'e','É'=>'e','È'=>'e','Ê'=>'e','Ë'=>'e',
+            'í'=>'i','ì'=>'i','î'=>'i','ï'=>'i','Í'=>'i','Ì'=>'i','Î'=>'i','Ï'=>'i',
+            'ó'=>'o','ò'=>'o','õ'=>'o','ô'=>'o','ö'=>'o','Ó'=>'o','Ò'=>'o','Õ'=>'o','Ô'=>'o','Ö'=>'o',
+            'ú'=>'u','ù'=>'u','û'=>'u','ü'=>'u','Ú'=>'u','Ù'=>'u','Û'=>'u','Ü'=>'u',
+            'ç'=>'c','Ç'=>'c','ñ'=>'n','Ñ'=>'n',
+        ];
+        $text = strtr($text, $map);
+
+        // Fallback adicional para quaisquer outros acentos remanescentes.
         if (function_exists('iconv')) {
             $converted = @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $text);
-            if ($converted !== false) {
+            if ($converted !== false && $converted !== '') {
                 $text = $converted;
             }
         }
+
         $text = strtolower($text);
         $text = preg_replace('/[^a-z0-9]+/', '-', $text) ?? '';
         $text = trim($text, '-');
