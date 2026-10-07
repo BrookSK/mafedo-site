@@ -442,9 +442,14 @@ body.no-hero .site-header.is-solid { height: 68px; }
     .nav a.is-active { color: var(--orange); }
     /* CTA dentro do menu mobile */
     .nav .nav__cta {
-        display: block; margin-top: 24px; border: none; padding: 0;
+        display: block; margin-top: 28px; border: none; padding: 0;
     }
-    .nav .nav__cta .btn { display: inline-flex; width: 100%; }
+    .nav .nav__cta .btn {
+        display: flex; width: 100%;
+        justify-content: center; align-items: center;
+        padding: 16px 24px; gap: 10px;
+        text-align: center; white-space: nowrap;
+    }
 
     .nav-toggle { display: flex; z-index: 100; }
     .header-cta > .btn { display: none; } /* esconde CTA do topo; vai pro menu */
