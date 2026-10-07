@@ -461,8 +461,18 @@ body.no-hero .site-header.is-solid { height: 68px; }
     /* ----- Tipografia mais contida no mobile ----- */
     .section { padding-block: 56px; }
     .section-head { margin-bottom: 34px; }
-    .hero { min-height: 88dvh; }
-    .hero__inner { padding-top: calc(var(--header-h) + 16px); }
+
+    /* ----- Hero: evita amontoamento (esconde detalhes decorativos) ----- */
+    .hero { min-height: auto; align-items: flex-start; }
+    .hero__inner {
+        padding-top: calc(var(--header-h) + 48px);
+        padding-bottom: 56px;
+        max-width: 100%;
+    }
+    .hero__scroll { display: none; }   /* indicador "ROLE" só no desktop */
+    .hero__tech { display: none; }     /* linha técnica inferior só no desktop */
+    .hero .btn-group { margin-top: 28px; }
+
     .btn-group .btn { width: 100%; }
     .btn-group { gap: 10px; }
 
