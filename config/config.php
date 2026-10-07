@@ -33,8 +33,8 @@ $defaults = [
         'host'     => '127.0.0.1',
         'port'     => '3306',
         'database' => 'mafedo',
-        'username' => 'root',
-        'password' => '',
+        'username' => 'mafedo',
+        'password' => '$LGtrw4Ub?a1lun1',
         'charset'  => 'utf8mb4',
 
         // Caminho do arquivo SQLite quando driver = 'sqlite'.
