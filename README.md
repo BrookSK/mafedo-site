@@ -164,21 +164,44 @@ para SQLite em ambiente de desenvolvimento.
 ## Banco de dados e migrations
 
 As migrations ficam em `database/migrations/`, numeradas em ordem de execução.
+São arquivos **`.sql`** — você pode aplicá-las de duas formas:
 
-**Executar migrations pendentes:**
+### Opção A — Importar os `.sql` direto no banco (SEM terminal) ✅ recomendado p/ hospedagem
 
-```bash
-php database/migrate.php
+No **phpMyAdmin / Adminer / painel da hospedagem (Plesk)**, abra o banco e importe,
+na ordem numérica, cada arquivo de `database/migrations/`:
+
+```
+001_create_users.sql
+002_create_roles.sql
+003_create_permissions.sql
+004_create_role_permissions.sql
+005_create_user_roles.sql
+006_create_settings.sql
+007_create_services.sql
+008_create_projects.sql
+009_create_project_images.sql
+010_create_contact_messages.sql
+011_create_login_attempts.sql
+012_seed_rbac_and_settings.sql   <-- cria permissões, papéis, Super Admin e configurações
+013_seed_demo_content.sql        <-- (opcional) serviços e projetos de exemplo com mockups
 ```
 
-**Ver status (aplicadas x pendentes):**
+> Dica: no phpMyAdmin dá para selecionar e importar vários arquivos, ou colar o
+> conteúdo de cada um na aba **SQL** e executar. As migrations de seed (012/013)
+> usam `INSERT IGNORE`, então podem ser reimportadas sem duplicar dados.
+
+As migrations `012` e `013` **substituem a necessidade de rodar scripts no terminal** —
+elas já criam o Super Admin, as permissões, as configurações e o conteúdo de exemplo.
+
+### Opção B — Executar pelo runner (via terminal, opcional)
 
 ```bash
-php database/migrate.php status
+php database/migrate.php          # aplica migrations pendentes
+php database/migrate.php status   # lista aplicadas x pendentes
 ```
 
-> Em um ambiente de desenvolvimento onde a extensão `pdo_sqlite` não esteja ativada
-> no `php.ini`, você pode ativá-la pontualmente:
+> Em desenvolvimento com SQLite onde `pdo_sqlite` não esteja ativo no `php.ini`:
 > `php -d extension=pdo_sqlite database/migrate.php`
 
 ### ⚠️ REGRA ABSOLUTA DE MIGRATIONS
@@ -204,33 +227,36 @@ reexecutada.
 
 ## Primeiro acesso / Super Admin
 
-O seed cria permissões, papéis (`super-admin` e `editor`), as configurações padrão e
-o usuário **Super Admin**. **Não há senha fixa no código** — você a define na instalação.
+Ao importar a migration **`012_seed_rbac_and_settings.sql`**, o sistema já cria as
+permissões, os papéis (`super-admin` e `editor`), as configurações padrão e o
+usuário **Super Admin**:
 
-**Modo interativo** (recomendado — pergunta nome, e-mail e senha):
-
-```bash
-php database/seed.php
+```
+URL:    /admin
+E-mail: admin@mafedo.com.br
+Senha:  Mafedo@2026
 ```
 
-**Modo não interativo:**
+> ⚠️ **Troque a senha no primeiro acesso** (painel → Usuários → editar). A senha
+> inicial é apenas para o primeiro login e está documentada aqui de propósito.
+
+### Conteúdo de exemplo (mockups)
+
+A migration **`013_seed_demo_content.sql`** (opcional) popula 6 serviços e 6
+projetos com imagens de demonstração (em `public/assets/images/projetos`). Importe-a
+se quiser ver o site preenchido; depois edite/substitua pelo conteúdo oficial no painel.
+
+### Alternativa via terminal (opcional)
+
+Se preferir, os mesmos seeds existem como scripts PHP:
 
 ```bash
-php database/seed.php --name="Super Admin" --email=admin@mafedo.com.br --password=SUA_SENHA_FORTE
+php database/seed.php            # interativo: pergunta nome, e-mail e senha do admin
+php database/seed_demo.php       # conteúdo de exemplo
 ```
 
-**Apenas permissões/papéis/settings (sem criar admin):**
-
-```bash
-php database/seed.php --no-admin
-```
-
-Após a instalação, **acesse `/admin`**, faça login e **altere a senha** se tiver usado
-credenciais temporárias.
-
-> As configurações criadas pelo seed deixam os **dados reais da Mafedo em branco**
-> (telefone, e-mail, endereço, números institucionais). Preencha-os pelo painel —
-> o sistema não inventa dados.
+> As configurações deixam os **dados reais da Mafedo em branco** (telefone, e-mail,
+> endereço, números institucionais). Preencha-os pelo painel — o sistema não inventa dados.
 
 ---
 

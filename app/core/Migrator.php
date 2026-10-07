@@ -177,6 +177,15 @@ final class Migrator
         $sql = preg_replace('/,\s*KEY\s+\w+\s*\([^)]+\)/i', '', $sql) ?? $sql;
 
         // CONSTRAINT fk ... FOREIGN KEY mantém-se compatível no SQLite.
+
+        // --- Compatibilidade de comandos de dados (seeds) ---
+        // INSERT IGNORE INTO -> INSERT OR IGNORE INTO
+        $sql = preg_replace('/INSERT\s+IGNORE\s+INTO/i', 'INSERT OR IGNORE INTO', $sql) ?? $sql;
+        // NOW() / CURRENT_TIMESTAMP() -> CURRENT_TIMESTAMP
+        $sql = preg_replace('/\bNOW\(\)/i', "CURRENT_TIMESTAMP", $sql) ?? $sql;
+        // ON DUPLICATE KEY UPDATE não é suportado — não usado nos seeds deste projeto.
+        // CROSS JOIN é suportado pelo SQLite.
+
         return $sql;
     }
 
