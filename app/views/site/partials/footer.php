@@ -40,11 +40,8 @@ if (!empty($footerServices)) {
                     <?php if ($logo !== ''): ?>
                         <img src="<?= e(upload_url($logo)) ?>" alt="<?= e($companyName) ?>" class="brand__img">
                     <?php else: ?>
-                        <img src="<?= e(asset('images/brand/mafedo-symbol.svg')) ?>" alt="" class="brand__symbol" width="44" height="48" aria-hidden="true">
-                        <span class="brand__text">
-                            <span class="brand__word">MAFEDO<span class="brand__dot">.</span></span>
-                            <span class="brand__tag">ENGENHARIA</span>
-                        </span>
+                        <span class="brand__word">MAFEDO<span class="brand__dot">.</span></span>
+                        <span class="brand__tag">ENGENHARIA</span>
                     <?php endif; ?>
                 </a>
                 <p class="footer-desc">Engenharia com rigor técnico, segurança e capacidade de execução para transformar projetos em resultados.</p>
