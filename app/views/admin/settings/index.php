@@ -22,7 +22,7 @@ $tabs = [
 </div>
 
 <?php if ($tab === 'general'): ?>
-    <form method="post" action="<?= e(url('admin/configuracoes/geral')) ?>" class="card">
+    <form method="post" action="<?= e(url('admin/configuracoes/geral')) ?>" class="card" enctype="multipart/form-data">
         <?= csrf_field() ?>
         <div class="card__head">Informações gerais</div>
         <div class="card__body form-grid cols-2">
@@ -32,6 +32,37 @@ $tabs = [
             <div class="field"><label>Horário de atendimento</label><input class="input" name="business_hours" value="<?= $g($general,'business_hours') ?>" placeholder="Seg a Sex, 8h às 18h"></div>
             <div class="field span-2"><label>Endereço</label><textarea class="textarea" name="contact_address" rows="3"><?= $g($general,'contact_address') ?></textarea></div>
         </div>
+
+        <div class="card__head" style="border-top:1px solid var(--border)">Logotipos</div>
+        <div class="card__body form-grid cols-2">
+            <?php
+            $logoHeader = $general['logo_header'] ?? '';
+            $logoFooter = $general['logo_footer'] ?? '';
+            ?>
+            <div class="field">
+                <label>Logo do cabeçalho (header)</label>
+                <?php if ($logoHeader !== ''): ?>
+                    <div style="background:#01071F;padding:12px;border-radius:6px;margin-bottom:8px;display:inline-block">
+                        <img src="<?= e(upload_url($logoHeader)) ?>" alt="Logo do header" style="max-height:48px;display:block">
+                    </div>
+                    <label class="switch" style="font-weight:400"><input type="checkbox" name="logo_header_remove" value="1"> Remover logo (voltar ao texto)</label>
+                <?php endif; ?>
+                <input class="input" type="file" name="logo_header" accept="image/png,image/svg+xml,image/webp,image/jpeg">
+                <span class="hint">Se enviar uma logo, ela substitui o texto "MAFEDO." no cabeçalho. PNG com fundo transparente é o ideal. Máx. 8 MB.</span>
+            </div>
+            <div class="field">
+                <label>Logo do rodapé (footer)</label>
+                <?php if ($logoFooter !== ''): ?>
+                    <div style="background:#01071F;padding:12px;border-radius:6px;margin-bottom:8px;display:inline-block">
+                        <img src="<?= e(upload_url($logoFooter)) ?>" alt="Logo do footer" style="max-height:56px;display:block">
+                    </div>
+                    <label class="switch" style="font-weight:400"><input type="checkbox" name="logo_footer_remove" value="1"> Remover logo (voltar ao texto)</label>
+                <?php endif; ?>
+                <input class="input" type="file" name="logo_footer" accept="image/png,image/svg+xml,image/webp,image/jpeg">
+                <span class="hint">Se enviar uma logo, ela substitui o texto "MAFEDO." no rodapé. PNG com fundo transparente é o ideal. Máx. 8 MB.</span>
+            </div>
+        </div>
+
         <div class="card__body" style="border-top:1px solid var(--border)"><button class="btn btn--primary">Salvar</button></div>
     </form>
 

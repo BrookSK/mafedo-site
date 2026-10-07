@@ -3,7 +3,7 @@ use App\Models\Service;
 use App\Models\Setting;
 
 $companyName = (string) Setting::get('company_name', 'Mafedo Engenharia');
-$logo = (string) Setting::get('company_logo', '');
+$logo = (string) (Setting::get('logo_footer') ?: Setting::get('company_logo', ''));
 $email = (string) Setting::get('contact_email', '');
 $phone = (string) Setting::get('contact_phone', '');
 $address = (string) Setting::get('contact_address', '');

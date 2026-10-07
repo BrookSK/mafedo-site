@@ -9,6 +9,7 @@ use App\Core\Session;
 use App\Core\Validator;
 use App\Models\Setting;
 use App\Services\Mailer;
+use App\Services\UploadService;
 
 final class SettingController extends Controller
 {
@@ -36,7 +37,45 @@ final class SettingController extends Controller
             'contact_address' => (string) $this->request->input('contact_address', ''),
             'business_hours'  => (string) $this->request->input('business_hours', ''),
         ]);
+
+        // Logos (header e footer) — upload opcional; se vazio, mantém a atual.
+        $this->handleLogoField('logo_header', 'logo_header_remove');
+        $this->handleLogoField('logo_footer', 'logo_footer_remove');
+
         $this->done('general');
+    }
+
+    /**
+     * Processa o campo de logo: remove se marcado, ou substitui se um novo
+     * arquivo foi enviado. Caso contrário, mantém o valor atual.
+     */
+    private function handleLogoField(string $key, string $removeFlag): void
+    {
+        $current = (string) Setting::get($key, '');
+
+        // Remoção explícita.
+        if ($this->request->input($removeFlag)) {
+            if ($current !== '') {
+                UploadService::delete($current);
+            }
+            Setting::set($key, '');
+            return;
+        }
+
+        $file = $this->request->file($key);
+        if ($file === null || ($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+            return; // nada enviado: mantém
+        }
+
+        try {
+            $stored = UploadService::store($file, 'marca');
+            if ($current !== '') {
+                UploadService::delete($current);
+            }
+            Setting::set($key, $stored);
+        } catch (\RuntimeException $e) {
+            Session::flash('error', 'Logo (' . $key . '): ' . $e->getMessage());
+        }
     }
 
     public function saveSeo(): void
