@@ -70,7 +70,7 @@
             </ul>
         </div>
         <div class="split__media reveal ticked" data-delay="1">
-            <img src="<?= e(asset('images/projetos/industrial.jpg')) ?>" alt="Obra da Mafedo em execução" loading="lazy">
+            <img src="<?= e(asset('images/site/services-segments.jpg')) ?>" alt="Reforma predial executada pela Mafedo" loading="lazy">
         </div>
     </div>
 </section>

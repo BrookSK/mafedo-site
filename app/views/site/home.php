@@ -6,11 +6,11 @@
         <?php if (!empty($hero['image'])): ?>
             <img src="<?= e(upload_url($hero['image'])) ?>" alt="" fetchpriority="high">
         <?php else: ?>
-            <img src="<?= e(asset('images/projetos/hero-torres.jpg')) ?>" alt="" fetchpriority="high">
+            <img src="<?= e(asset('images/site/home-hero.jpg')) ?>" alt="" fetchpriority="high">
         <?php endif; ?>
     </div>
     <div class="hero__overlay"></div>
-    <span class="hero__code">MAFEDO · ENGENHARIA · SP</span>
+    <span class="hero__code"><?= date('Y') ?> · SÃO PAULO · SP</span>
     <div class="container">
         <div class="hero__inner">
             <p class="eyebrow"><?= e($hero['eyebrow']) ?></p>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="split__media reveal ticked" data-delay="1">
-            <img src="<?= e(Setting::get('home_hero_image') ? upload_url((string) Setting::get('home_hero_image')) : asset('images/projetos/comercial.jpg')) ?>" alt="Atuação da Mafedo Engenharia" loading="lazy">
+            <img src="<?= e(Setting::get('home_hero_image') ? upload_url((string) Setting::get('home_hero_image')) : asset('images/site/home-intro.jpg')) ?>" alt="Equipe de engenharia da Mafedo em obra" loading="lazy">
         </div>
     </div>
 </section>
@@ -106,14 +106,14 @@
     </div>
 </section>
 
-<!-- 06 — DIFERENCIAIS (institucional, com ícones) -->
-<section class="section section--navy blueprint">
+<!-- 06 — DIFERENCIAIS (fundo claro, institucional, com ícones) -->
+<section class="section section--soft blueprint">
     <div class="container">
         <div class="sx-head reveal">
             <div class="sx-index"><span class="sx-num">/04</span><span class="sx-line"></span><span class="sx-label">Por que a Mafedo</span></div>
             <h2>O que sustenta cada entrega.</h2>
         </div>
-        <div class="diff-grid">
+        <div class="diff-grid diff-grid--light">
             <?php
             // Diferenciais baseados nos valores reais da Mafedo (site institucional).
             // Ícone de linha simples para um tom mais humano/institucional.

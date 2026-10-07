@@ -20,7 +20,7 @@ $err = static fn (string $k) => isset($errors[$k]) ? '<span class="field-error">
 $hasErr = static fn (string $k) => isset($errors[$k]) ? ' has-error' : '';
 $flashError = Session::flash('error');
 ?>
-<section class="section blueprint" style="padding-top: calc(var(--header-h) + 70px)">
+<section class="section" style="padding-top: calc(var(--header-h) + 70px)">
     <div class="container">
         <div class="sx-head reveal">
             <div class="sx-index"><span class="sx-num">/CONTATO</span><span class="sx-line"></span><span class="sx-label">Fale com a Mafedo</span></div>

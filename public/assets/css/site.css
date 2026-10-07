@@ -596,6 +596,12 @@ body.no-hero .site-header.is-solid { height: 68px; }
 .diff__ico svg { width: 22px; height: 22px; }
 .diff h3 { font-weight: 500; font-size: 1.2rem; margin: 0 0 8px; color: #fff; }
 
+/* Variante clara (fundo off-white) — menos "tech", mais institucional */
+.diff-grid--light .diff { background: #fff; border-color: var(--line); }
+.diff-grid--light .diff:hover { border-color: rgba(245,98,8,.55); background: #fff; box-shadow: 0 16px 36px rgba(1,7,31,.07); }
+.diff-grid--light .diff h3 { color: var(--navy); }
+.diff-grid--light .diff .muted { color: var(--muted); }
+
 /* ---- Hero: camada técnica (coordenada + cota) ---- */
 .hero__tech {
     position: absolute; z-index: 1; left: var(--gutter); bottom: 26px;
@@ -683,21 +689,17 @@ a.channel:hover .channel__go { transform: translateX(4px); }
 }
 
 
-/* ---- A Mafedo: faixa de imagem editorial + missão/visão/valores ---- */
-.about-band { position: relative; min-height: 420px; display: flex; align-items: center; overflow: hidden; color: #fff; }
-.about-band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-.about-band__overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(1,7,31,.9) 0%, rgba(1,7,31,.55) 55%, rgba(1,7,31,.25) 100%); }
-.about-band__content { position: relative; z-index: 2; padding-block: 60px; }
-.about-band__tag { font-family: var(--font-head); font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; color: var(--orange); }
-.about-band__quote { font-family: var(--font-head); font-weight: 500; font-size: clamp(1.4rem, 3vw, 2.3rem); line-height: 1.25; max-width: 20ch; margin: 16px 0 0; letter-spacing: -.01em; }
+/* ---- A Mafedo: intro assimétrica + missão/visão/valores sóbrios ---- */
+.about-intro { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(30px, 5vw, 70px); align-items: center; margin-top: 10px; }
+.about-intro__text h1 { margin-bottom: .35em; }
+.about-intro__media { margin: 0; }
+.about-intro__media img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
 
-.mvv { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-.mvv__item { background: var(--soft); padding: 34px 30px; }
-.mvv__n { font-family: var(--font-head); font-size: 2.6rem; font-weight: 700; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(245,98,8,.6); display: block; margin-bottom: 14px; }
-.mvv__item h3 { font-weight: 500; font-size: 1.3rem; margin: 0 0 10px; }
+.mvv { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.mvv__item { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--orange); padding: 30px 28px; }
+.mvv__k { font-family: var(--font-head); font-weight: 600; font-size: 1.25rem; color: var(--navy); display: block; margin-bottom: 12px; }
+.mvv__item p { color: var(--muted); margin: 0; }
 
-@media (max-width: 760px) {
-    .about-band { min-height: 320px; }
-    .about-band__overlay { background: linear-gradient(180deg, rgba(1,7,31,.65), rgba(1,7,31,.88)); }
-    .mvv__item { padding: 26px 22px; }
+@media (max-width: 860px) {
+    .about-intro { grid-template-columns: 1fr; gap: 28px; }
 }
