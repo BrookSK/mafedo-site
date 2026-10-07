@@ -1,9 +1,9 @@
-<section class="section" style="padding-top: calc(var(--header-h) + 70px)">
+<section class="section blueprint" style="padding-top: calc(var(--header-h) + 70px)">
     <div class="container">
-        <div class="section-head reveal">
-            <p class="eyebrow">O que fazemos</p>
-            <h1>Serviços</h1>
-            <p class="lead">Soluções de engenharia para cada etapa do seu projeto.</p>
+        <div class="sx-head reveal">
+            <div class="sx-index"><span class="sx-num">/SERVIÇOS</span><span class="sx-line"></span><span class="sx-label">O que fazemos</span></div>
+            <h1>Soluções de engenharia, do projeto à entrega.</h1>
+            <p class="lead">Atuação técnica em todas as etapas da sua obra.</p>
         </div>
 
         <?php if (empty($services)): ?>
@@ -12,13 +12,15 @@
                 <a class="btn btn--ghost-dark" href="<?= e(url('/contato')) ?>">Fale com a Mafedo</a>
             </div>
         <?php else: ?>
-            <div class="services-grid">
+            <div class="svc-list">
                 <?php foreach ($services as $i => $s): ?>
-                    <a class="service-card reveal" data-delay="<?= $i % 3 ?>" href="<?= e(url('/servicos/' . $s['slug'])) ?>">
-                        <span class="ico"><?= e(mb_strtoupper(mb_substr($s['title'], 0, 1))) ?></span>
-                        <h3><?= e($s['title']) ?></h3>
-                        <p class="muted"><?= e(str_excerpt((string) $s['short_description'], 140)) ?></p>
-                        <span class="more">Saiba mais →</span>
+                    <a class="svc-row reveal" data-delay="<?= $i % 3 ?>" href="<?= e(url('/servicos/' . $s['slug'])) ?>">
+                        <span class="svc-row__num"><?= str_pad((string)($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
+                        <span>
+                            <span class="svc-row__title"><?= e($s['title']) ?></span>
+                            <span class="svc-row__desc"><?= e(str_excerpt((string) $s['short_description'], 140)) ?></span>
+                        </span>
+                        <span class="svc-row__go" aria-hidden="true">→</span>
                     </a>
                 <?php endforeach; ?>
             </div>

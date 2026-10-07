@@ -485,3 +485,132 @@ body.no-hero .site-header.is-solid { height: 68px; }
     .cookie .btn-group { width: 100%; }
     .cookie .btn { flex: 1; }
 }
+
+
+/* ==========================================================================
+   SISTEMA VISUAL "DESENHO TÉCNICO / ENGENHARIA"
+   Diferencia o site de templates genéricos: grid tipo blueprint, índice de
+   seção numerado, cotas, números display e composições assimétricas.
+   ========================================================================== */
+
+/* ---- Grid blueprint de fundo (linhas-guia técnicas, bem sutis) ---- */
+.blueprint { position: relative; }
+.blueprint::before {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+        linear-gradient(to right, rgba(8,40,89,.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(8,40,89,.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+            mask-image: linear-gradient(180deg, transparent, #000 12%, #000 88%, transparent);
+}
+.section--navy.blueprint::before {
+    background-image:
+        linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+}
+.blueprint > .container { position: relative; z-index: 1; }
+
+/* ---- Índice de seção numerado (estilo planta técnica) ---- */
+.sx-head { position: relative; margin-bottom: 54px; }
+.sx-index {
+    display: flex; align-items: center; gap: 14px;
+    font-family: var(--font-head); font-size: .78rem; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--orange);
+    margin-bottom: 22px;
+}
+.sx-index .sx-num { position: relative; padding-right: 2px; }
+.sx-index .sx-line { flex: 1; height: 1px; background: currentColor; opacity: .35; max-width: 120px; }
+.sx-index .sx-label { color: var(--ink); opacity: .55; letter-spacing: .14em; }
+.section--navy .sx-index .sx-label { color: #fff; opacity: .6; }
+.sx-head h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); max-width: 18ch; }
+.sx-head .lead { margin-top: 14px; }
+
+/* "ticks" de canto, como marcação de folha técnica */
+.ticked { position: relative; }
+.ticked::before, .ticked::after {
+    content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none;
+    border-color: var(--orange); opacity: .7;
+}
+.ticked::before { top: 0; left: 0; border-top: 2px solid; border-left: 2px solid; }
+.ticked::after  { bottom: 0; right: 0; border-bottom: 2px solid; border-right: 2px solid; }
+
+/* ---- Serviços como SUMÁRIO editorial numerado (substitui cards genéricos) ---- */
+.svc-list { border-top: 1px solid var(--line); }
+.section--navy .svc-list { border-top-color: rgba(255,255,255,.14); }
+.svc-row {
+    display: grid; grid-template-columns: 68px 1fr auto; align-items: center; gap: 28px;
+    padding: 30px 8px; border-bottom: 1px solid var(--line);
+    position: relative; text-decoration: none; color: inherit;
+    transition: padding-left .35s var(--ease), background .35s;
+}
+.svc-row::after {
+    content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 0;
+    background: var(--orange); transition: width .4s var(--ease);
+}
+.svc-row:hover { padding-left: 20px; background: linear-gradient(90deg, rgba(245,98,8,.05), transparent 60%); }
+.svc-row:hover::after { width: 100%; }
+.svc-row__num { font-family: var(--font-head); font-size: 1rem; font-weight: 600; color: var(--orange); letter-spacing: .05em; }
+.svc-row__title { font-family: var(--font-head); font-size: clamp(1.3rem, 2.6vw, 2rem); font-weight: 500; line-height: 1.1; letter-spacing: -.01em; }
+.svc-row__desc { color: var(--muted); font-size: .98rem; margin-top: 6px; max-width: 52ch; }
+.svc-row__go {
+    width: 46px; height: 46px; border: 1px solid var(--line); border-radius: 50%;
+    display: grid; place-items: center; color: var(--navy); flex: none;
+    transition: background .3s, color .3s, border-color .3s, transform .3s var(--ease);
+}
+.svc-row:hover .svc-row__go { background: var(--orange); color: #fff; border-color: var(--orange); transform: rotate(-45deg); }
+
+/* ---- Projetos: layout editorial ASSIMÉTRICO (não grid uniforme) ---- */
+.proj-editorial { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+.proj-item { position: relative; overflow: hidden; display: block; text-decoration: none; background: var(--navy-2); }
+.proj-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease), filter .4s; filter: saturate(.9); }
+.proj-item:hover img { transform: scale(1.04); filter: saturate(1.05); }
+.proj-item__cap {
+    position: absolute; inset: auto 0 0 0; padding: 22px 24px; color: #fff;
+    background: linear-gradient(180deg, transparent, rgba(1,7,31,.9));
+}
+.proj-item__idx { position: absolute; top: 18px; left: 20px; font-family: var(--font-head); font-size: .72rem; letter-spacing: .2em; color: rgba(255,255,255,.75); z-index:2; }
+.proj-item__cat { font-family: var(--font-head); font-size: .72rem; text-transform: uppercase; letter-spacing: .16em; color: var(--orange); display:block; margin-bottom: 5px; }
+.proj-item__title { font-family: var(--font-head); font-size: 1.4rem; font-weight: 500; }
+.proj-item__meta { font-size: .88rem; color: #cdd6e8; margin-top: 3px; }
+/* padrão assimétrico: 1º grande (7 col alto), 2º e 3º empilhados (5 col), depois alterna */
+.proj-item:nth-child(6n+1) { grid-column: span 7; aspect-ratio: 16/11; }
+.proj-item:nth-child(6n+2) { grid-column: span 5; aspect-ratio: 5/4; }
+.proj-item:nth-child(6n+3) { grid-column: span 5; aspect-ratio: 5/4; }
+.proj-item:nth-child(6n+4) { grid-column: span 7; aspect-ratio: 16/11; }
+.proj-item:nth-child(6n+5) { grid-column: span 6; aspect-ratio: 3/2; }
+.proj-item:nth-child(6n+6) { grid-column: span 6; aspect-ratio: 3/2; }
+
+/* ---- Diferenciais com número display gigante ---- */
+.diff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0; }
+.diff { padding: 34px 30px 34px 0; position: relative; }
+.diff + .diff { border-left: 1px solid rgba(255,255,255,.12); padding-left: 34px; }
+.diff__n {
+    font-family: var(--font-head); font-size: 3.4rem; font-weight: 700; line-height: 1;
+    color: transparent; -webkit-text-stroke: 1px rgba(245,98,8,.65); letter-spacing: -.03em;
+    display: block; margin-bottom: 16px;
+}
+.diff h3 { font-weight: 500; font-size: 1.25rem; margin: 0 0 8px; }
+
+/* ---- Hero: camada técnica (coordenada + cota) ---- */
+.hero__tech {
+    position: absolute; z-index: 1; left: var(--gutter); bottom: 26px;
+    display: flex; align-items: center; gap: 16px;
+    font-family: var(--font-head); font-size: .72rem; letter-spacing: .18em;
+    text-transform: uppercase; color: rgba(255,255,255,.6);
+}
+.hero__tech .dot { width: 6px; height: 6px; background: var(--orange); display: inline-block; }
+.hero__code {
+    position: absolute; z-index: 1; right: var(--gutter); top: calc(var(--header-h) + 24px);
+    font-family: var(--font-head); font-size: .72rem; letter-spacing: .2em; color: rgba(255,255,255,.5);
+    writing-mode: vertical-rl; text-orientation: mixed;
+}
+@media (max-width: 760px) {
+    .hero__code { display: none; }
+    .diff + .diff { border-left: none; border-top: 1px solid rgba(255,255,255,.12); padding-left: 0; padding-top: 26px; margin-top: 26px; }
+    .svc-row { grid-template-columns: 48px 1fr; gap: 16px; padding: 22px 4px; }
+    .svc-row__go { display: none; }
+    .proj-editorial { grid-template-columns: 1fr; }
+    .proj-item:nth-child(n) { grid-column: auto; aspect-ratio: 3/2; }
+    .sx-head { margin-bottom: 36px; }
+}
