@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Imagem indisponível">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#082859"/>
+      <stop offset="1" stop-color="#01071F"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <g fill="none" stroke="#1b3a6b" stroke-width="1.5" opacity="0.5">
+    <path d="M0 150 H800 M0 300 H800 M0 450 H800 M200 0 V600 M400 0 V600 M600 0 V600"/>
+  </g>
+  <g transform="translate(400,280)" text-anchor="middle" font-family="'Space Grotesk',Arial,sans-serif">
+    <text y="0" fill="#FEFEFE" font-size="46" font-weight="700" letter-spacing="2">MAFEDO<tspan fill="#F56208">.</tspan></text>
+    <text y="46" fill="#9fb0cf" font-size="20" letter-spacing="3">IMAGEM EM BREVE</text>
+  </g>
+</svg>

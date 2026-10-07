@@ -1,0 +1,12 @@
+{
+  "name": "Mafedo Engenharia",
+  "short_name": "Mafedo",
+  "description": "Engenharia com rigor técnico, segurança e capacidade de execução.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#01071F",
+  "theme_color": "#01071F",
+  "icons": [
+    { "src": "/assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

@@ -1,0 +1,36 @@
+# Dependências e build
+/vendor/
+/node_modules/
+
+# Configuração local sensível (credenciais do banco)
+/config/config.local.php
+
+# Uploads enviados pelo painel
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Storage: logs, cache, sessões, banco sqlite de desenvolvimento
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/cache/*
+!/storage/cache/.gitkeep
+/storage/sessions/*
+!/storage/sessions/.gitkeep
+/storage/database/*
+!/storage/database/.gitkeep
+*.sqlite
+*.sqlite3
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.idea/
+.vscode/
+*.swp
+*~
+
+# Logs diversos
+*.log

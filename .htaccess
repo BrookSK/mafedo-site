@@ -1,0 +1,44 @@
+# ============================================================================
+# .htaccess da RAIZ do projeto.
+#
+# Em hospedagens onde não é possível apontar o DocumentRoot para /public,
+# este arquivo serve os assets de /public e envia todas as demais requisições
+# para o front controller, protegendo as pastas sensíveis da aplicação.
+#
+# Em produção, PREFIRA configurar o DocumentRoot do Apache diretamente para a
+# pasta /public e use o .htaccess de dentro de /public.
+# ============================================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Servir assets e uploads diretamente de /public
+    RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+    RewriteRule ^uploads/(.*)$ public/uploads/$1 [L]
+    RewriteRule ^favicon\.ico$ public/favicon.ico [L]
+    RewriteRule ^site\.webmanifest$ public/site.webmanifest [L]
+    RewriteRule ^robots\.txt$ public/index.php?url=robots.txt [L]
+    RewriteRule ^sitemap\.xml$ public/index.php?url=sitemap.xml [L]
+
+    # Se o arquivo/diretório existir fisicamente, entrega direto
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Caso contrário, envia tudo para o front controller
+    RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
+</IfModule>
+
+# Bloquear acesso direto a pastas sensíveis da aplicação
+RedirectMatch 403 ^/?(app|config|database|routes|storage)(/|$)
+
+# Bloquear acesso a arquivos sensíveis
+<FilesMatch "(^\.|\.(sql|md|json|lock|log|sqlite|sqlite3|ini|yml|yaml)$|composer\.(json|lock))">
+    Require all denied
+</FilesMatch>
+
+# Impedir listagem de diretórios
+Options -Indexes
+
+# Codificação padrão
+AddDefaultCharset UTF-8
