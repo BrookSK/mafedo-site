@@ -48,6 +48,7 @@ final class Kernel
         // Views e helpers
         View::setViewsPath($this->basePath . '/app/views');
         require $this->basePath . '/app/helpers/functions.php';
+        require $this->basePath . '/app/helpers/icons.php';
 
         // Sessão
         Session::start();

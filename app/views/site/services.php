@@ -15,12 +15,12 @@
             <div class="svc-list">
                 <?php foreach ($services as $i => $s): ?>
                     <a class="svc-row reveal" data-delay="<?= $i % 3 ?>" href="<?= e(url('/servicos/' . $s['slug'])) ?>">
-                        <span class="svc-row__num"><?= str_pad((string)($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
+                        <span class="svc-row__ico"><?= icon(service_icon_name($s['slug'] . ' ' . $s['title'])) ?></span>
                         <span>
                             <span class="svc-row__title"><?= e($s['title']) ?></span>
                             <span class="svc-row__desc"><?= e(str_excerpt((string) $s['short_description'], 140)) ?></span>
                         </span>
-                        <span class="svc-row__go" aria-hidden="true">→</span>
+                        <span class="svc-row__go" aria-hidden="true"><?= icon('arrow') ?></span>
                     </a>
                 <?php endforeach; ?>
             </div>

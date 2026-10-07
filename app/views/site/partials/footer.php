@@ -14,7 +14,7 @@ $socials = [
     'LinkedIn'  => (string) Setting::get('social_linkedin', ''),
     'YouTube'   => (string) Setting::get('social_youtube', ''),
 ];
-$socialAbbr = ['Instagram' => 'IG', 'Facebook' => 'FB', 'LinkedIn' => 'IN', 'YouTube' => 'YT'];
+$socialIcon = ['Instagram' => 'instagram', 'Facebook' => 'facebook', 'LinkedIn' => 'linkedin', 'YouTube' => 'youtube'];
 
 try { $footerServices = (new Service())->active(); } catch (\Throwable) { $footerServices = []; }
 $footerServices = array_slice($footerServices, 0, 5);
@@ -51,10 +51,10 @@ if (!empty($footerServices)) {
                     foreach ($socials as $name => $urlSocial):
                         if ($urlSocial === '') continue;
                         $anySocial = true; ?>
-                        <a href="<?= e($urlSocial) ?>" target="_blank" rel="noopener" aria-label="<?= e($name) ?>"><?= e($socialAbbr[$name]) ?></a>
+                        <a href="<?= e($urlSocial) ?>" target="_blank" rel="noopener" aria-label="<?= e($name) ?>"><?= icon($socialIcon[$name] ?? 'default') ?></a>
                     <?php endforeach; ?>
                     <?php if (!$anySocial): ?>
-                        <a href="https://www.instagram.com/mafedo_engenharia/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+                        <a href="https://www.instagram.com/mafedo_engenharia/" target="_blank" rel="noopener" aria-label="Instagram"><?= icon('instagram') ?></a>
                     <?php endif; ?>
                 </div>
             </div>

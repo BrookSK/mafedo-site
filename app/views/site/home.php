@@ -56,12 +56,12 @@
         <div class="svc-list">
             <?php foreach ($featuredServices as $i => $s): ?>
                 <a class="svc-row reveal" data-delay="<?= $i % 3 ?>" href="<?= e(url('/servicos/' . $s['slug'])) ?>">
-                    <span class="svc-row__num"><?= str_pad((string)($i + 1), 2, '0', STR_PAD_LEFT) ?></span>
+                    <span class="svc-row__ico"><?= icon(service_icon_name($s['slug'] . ' ' . $s['title'])) ?></span>
                     <span>
                         <span class="svc-row__title"><?= e($s['title']) ?></span>
                         <span class="svc-row__desc"><?= e(str_excerpt((string) $s['short_description'], 120)) ?></span>
                     </span>
-                    <span class="svc-row__go" aria-hidden="true">→</span>
+                    <span class="svc-row__go" aria-hidden="true"><?= icon('arrow') ?></span>
                 </a>
             <?php endforeach; ?>
         </div>
@@ -116,24 +116,15 @@
         <div class="diff-grid diff-grid--light">
             <?php
             // Diferenciais baseados nos valores reais da Mafedo (site institucional).
-            // Ícone de linha simples para um tom mais humano/institucional.
             $diffs = [
                 ['people', 'Equipe especializada', 'Profissionais capacitados para execução dentro do mais elevado padrão de qualidade.'],
                 ['gear', 'Gerenciamento', 'Rotina coordenada com foco em qualidade, alinhamento e redução de custos.'],
                 ['clock', 'Prazo', 'Uso eficiente dos recursos para entregar atendendo às expectativas do cliente.'],
                 ['shield', 'Ética e confiança', 'Honestidade e compromisso em cada relação com clientes e parceiros.'],
             ];
-            $icons = [
-                'people' => '<path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M2 20a7 7 0 0 1 14 0M15 13a7 7 0 0 1 7 7"/>',
-                'gear'   => '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
-                'clock'  => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
-                'shield' => '<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/>',
-            ];
             foreach ($diffs as $i => $d): ?>
                 <div class="diff reveal" data-delay="<?= $i % 3 ?>">
-                    <span class="diff__ico" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><?= $icons[$d[0]] ?></svg>
-                    </span>
+                    <span class="diff__ico"><?= icon($d[0]) ?></span>
                     <h3><?= e($d[1]) ?></h3>
                     <p class="muted"><?= e($d[2]) ?></p>
                 </div>

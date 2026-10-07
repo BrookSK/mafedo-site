@@ -34,30 +34,45 @@ $flashError = Session::flash('error');
                 <div class="channels">
                     <?php if ($waNumber !== ''): ?>
                     <a class="channel channel--wa" href="https://wa.me/<?= e($waNumber) ?><?= $waMsg !== '' ? '?text=' . rawurlencode($waMsg) : '' ?>" target="_blank" rel="noopener">
-                        <span class="channel__k">WhatsApp</span>
-                        <span class="channel__v">Conversar agora</span>
-                        <span class="channel__go">→</span>
+                        <span class="channel__ico"><?= icon('whatsapp') ?></span>
+                        <span class="channel__body">
+                            <span class="channel__k">WhatsApp</span>
+                            <span class="channel__v">Conversar agora</span>
+                        </span>
+                        <span class="channel__go"><?= icon('arrow') ?></span>
                     </a>
                     <?php endif; ?>
 
                     <a class="channel" <?= $phone !== '' ? 'href="tel:' . e(preg_replace('/\D+/', '', $phone)) . '"' : '' ?>>
-                        <span class="channel__k">Telefone</span>
-                        <span class="channel__v"><?= e($phoneDisplay) ?></span>
+                        <span class="channel__ico"><?= icon('phone') ?></span>
+                        <span class="channel__body">
+                            <span class="channel__k">Telefone</span>
+                            <span class="channel__v"><?= e($phoneDisplay) ?></span>
+                        </span>
                     </a>
 
                     <a class="channel" href="mailto:<?= e($emailDisplay) ?>">
-                        <span class="channel__k">E-mail</span>
-                        <span class="channel__v"><?= e($emailDisplay) ?></span>
+                        <span class="channel__ico"><?= icon('mail') ?></span>
+                        <span class="channel__body">
+                            <span class="channel__k">E-mail</span>
+                            <span class="channel__v"><?= e($emailDisplay) ?></span>
+                        </span>
                     </a>
 
                     <div class="channel">
-                        <span class="channel__k">Endereço</span>
-                        <span class="channel__v"><?= nl2br(e($addressDisplay)) ?></span>
+                        <span class="channel__ico"><?= icon('pin') ?></span>
+                        <span class="channel__body">
+                            <span class="channel__k">Endereço</span>
+                            <span class="channel__v"><?= nl2br(e($addressDisplay)) ?></span>
+                        </span>
                     </div>
 
                     <div class="channel">
-                        <span class="channel__k">Atendimento</span>
-                        <span class="channel__v"><?= e($hoursDisplay) ?></span>
+                        <span class="channel__ico"><?= icon('clock') ?></span>
+                        <span class="channel__body">
+                            <span class="channel__k">Atendimento</span>
+                            <span class="channel__v"><?= e($hoursDisplay) ?></span>
+                        </span>
                     </div>
                 </div>
             </div>
