@@ -112,11 +112,12 @@
         </div>
         <div class="feature-grid">
             <?php
+            // Diferenciais baseados nos valores reais da Mafedo (site institucional).
             $diffs = [
-                ['Rigor técnico', 'Projetos conduzidos com critério de engenharia e atenção a cada detalhe.'],
-                ['Segurança', 'Compromisso com normas e procedimentos que protegem pessoas e obras.'],
-                ['Capacidade de execução', 'Estrutura e experiência para transformar planejamento em resultado.'],
-                ['Transparência', 'Comunicação clara em todas as etapas do projeto.'],
+                ['Equipe especializada', 'Profissionais capacitados para execução dentro do mais elevado padrão de qualidade.'],
+                ['Gerenciamento', 'Rotina coordenada com foco em qualidade, alinhamento e redução de custos.'],
+                ['Prazo', 'Uso eficiente dos recursos para entregar atendendo às expectativas do cliente.'],
+                ['Ética e confiança', 'Honestidade e compromisso em cada relação com clientes e parceiros.'],
             ];
             foreach ($diffs as $i => $d): ?>
                 <div class="feature reveal" data-delay="<?= $i % 3 ?>">

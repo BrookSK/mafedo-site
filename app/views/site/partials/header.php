@@ -21,22 +21,29 @@ $isActive = static function (string $href) use ($path): string {
             <?php if ($logo !== ''): ?>
                 <img src="<?= e(upload_url($logo)) ?>" alt="<?= e($companyName) ?>" class="brand__img">
             <?php else: ?>
-                <span class="brand__word">MAFEDO<span class="brand__dot">.</span></span>
-                <span class="brand__tag">ENGENHARIA</span>
+                <img src="<?= e(asset('images/brand/mafedo-symbol.svg')) ?>" alt="" class="brand__symbol" width="40" height="44" aria-hidden="true">
+                <span class="brand__text">
+                    <span class="brand__word">MAFEDO<span class="brand__dot">.</span></span>
+                    <span class="brand__tag">ENGENHARIA</span>
+                </span>
             <?php endif; ?>
         </a>
 
-        <nav class="nav" aria-label="Navegação principal">
+        <nav class="nav" id="mainNav" aria-label="Navegação principal">
             <?php foreach ($navItems as $href => $label): ?>
                 <a class="<?= trim($isActive($href)) ?>" href="<?= e(url($href)) ?>"><?= e($label) ?></a>
             <?php endforeach; ?>
+            <div class="nav__cta">
+                <a class="btn" href="<?= e(url('/contato')) ?>">Fale com a Mafedo</a>
+            </div>
         </nav>
 
         <div class="header-cta">
             <a class="btn" href="<?= e(url('/contato')) ?>">Fale com a Mafedo</a>
-            <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+            <button class="nav-toggle" aria-label="Abrir menu" aria-controls="mainNav" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </div>
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 </header>

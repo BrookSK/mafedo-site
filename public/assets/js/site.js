@@ -18,19 +18,25 @@
     /* ---- Menu mobile ---- */
     var toggle = document.querySelector('.nav-toggle');
     var nav = document.querySelector('.nav');
+    var backdrop = document.getElementById('navBackdrop');
     if (toggle && nav) {
-        toggle.addEventListener('click', function () {
-            var open = nav.classList.toggle('is-open');
+        var setMenu = function (open) {
+            nav.classList.toggle('is-open', open);
             toggle.classList.toggle('is-open', open);
+            if (backdrop) backdrop.classList.toggle('is-open', open);
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
             document.body.style.overflow = open ? 'hidden' : '';
+        };
+        toggle.addEventListener('click', function () {
+            setMenu(!nav.classList.contains('is-open'));
         });
         nav.querySelectorAll('a').forEach(function (a) {
-            a.addEventListener('click', function () {
-                nav.classList.remove('is-open');
-                toggle.classList.remove('is-open');
-                document.body.style.overflow = '';
-            });
+            a.addEventListener('click', function () { setMenu(false); });
+        });
+        if (backdrop) backdrop.addEventListener('click', function () { setMenu(false); });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && nav.classList.contains('is-open')) setMenu(false);
         });
     }
 
