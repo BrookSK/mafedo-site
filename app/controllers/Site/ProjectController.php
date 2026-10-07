@@ -66,6 +66,7 @@ final class ProjectController extends Controller
                 'description' => $project['seo_description'] ?: str_excerpt((string) $project['short_description'], 160),
                 'og_type'     => 'article',
                 'og_image'    => $project['main_image'] ? upload_url($project['main_image']) : '',
+                'hero_header' => true,
                 'structured'  => $structured,
             ],
             'project'         => $project,

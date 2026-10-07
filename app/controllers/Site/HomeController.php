@@ -19,6 +19,7 @@ final class HomeController extends Controller
             'meta' => [
                 'title'       => $companyName . ' · Engenharia que transforma projetos em resultados',
                 'description' => (string) Setting::get('seo_meta_description', ''),
+                'hero_header' => true,
                 'structured'  => [
                     '@context' => 'https://schema.org',
                     '@type'    => 'Organization',

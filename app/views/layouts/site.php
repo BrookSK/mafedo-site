@@ -16,6 +16,9 @@ $ga = (string) Setting::get('seo_google_analytics', '');
 $searchConsole = (string) Setting::get('seo_search_console', '');
 $structured = $meta['structured'] ?? null;
 $robots = $meta['robots'] ?? 'index, follow';
+// Páginas com hero escuro (home, projeto) usam header transparente sobre a imagem;
+// as demais usam header sólido desde o topo para o menu ter contraste.
+$heroHeader = !empty($meta['hero_header']);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -65,7 +68,7 @@ $robots = $meta['robots'] ?? 'index, follow';
         <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','<?= e($ga) ?>');</script>
     <?php endif; ?>
 </head>
-<body>
+<body class="<?= $heroHeader ? 'has-hero' : 'no-hero' ?>">
     <?php $this->partial('site/partials/header'); ?>
 
     <main id="conteudo">

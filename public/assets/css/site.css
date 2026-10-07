@@ -118,6 +118,13 @@ p { margin: 0 0 1em; }
     box-shadow: 0 1px 0 rgba(255,255,255,.06);
     height: 68px;
 }
+/* Páginas sem hero escuro: header sólido desde o topo (menu branco com contraste).
+   As páginas internas já reservam espaço do header no padding-top da 1ª seção. */
+body.no-hero .site-header {
+    background: #01071F;
+    box-shadow: 0 1px 0 rgba(255,255,255,.06);
+}
+body.no-hero .site-header.is-solid { height: 68px; }
 /* Lockup da marca: wordmark tipográfico "MAFEDO." + tag "ENGENHARIA" na base */
 .brand { display: inline-flex; align-items: baseline; gap: 9px; color: #fff; line-height: 1; }
 .brand__img { height: 46px; width: auto; align-self: center; }
