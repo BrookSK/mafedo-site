@@ -644,7 +644,6 @@ body.no-hero .site-header.is-solid { height: 68px; }
 }
 @media (max-width: 760px) {
     .hero__code { display: none; }
-    .diff + .diff { border-left: none; border-top: 1px solid rgba(255,255,255,.12); padding-left: 0; padding-top: 26px; margin-top: 26px; }
     .svc-row { grid-template-columns: 44px 1fr; gap: 16px; padding: 22px 4px; }
     .svc-row__ico { width: 44px; height: 44px; }
     .svc-row__ico svg { width: 20px; height: 20px; }
