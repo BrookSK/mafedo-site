@@ -10,7 +10,7 @@ $metaDesc = $meta['description'] ?? (string) Setting::get('seo_meta_description'
 $canonical = $meta['canonical'] ?? (base_url() . ($_SERVER['REQUEST_URI'] ?? '/'));
 $canonical = strtok($canonical, '?'); // remove querystring do canonical
 $ogImageSetting = (string) Setting::get('seo_og_image', '');
-$ogImage = $meta['og_image'] ?? ($ogImageSetting !== '' ? $ogImageSetting : asset('images/brand/logo-branco.png'));
+$ogImage = $meta['og_image'] ?? ($ogImageSetting !== '' ? $ogImageSetting : asset('images/brand/logo-azul.png'));
 $ogType = $meta['og_type'] ?? 'website';
 $ga = (string) Setting::get('seo_google_analytics', '');
 $searchConsole = (string) Setting::get('seo_search_console', '');
@@ -55,7 +55,8 @@ $heroHeader = !empty($meta['hero_header']);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Quicksand: mesma família tipográfica da logo Mafedo (identidade visual) -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preload" as="style" href="<?= e(asset('css/site.css')) ?>">
     <link rel="stylesheet" href="<?= e(asset('css/site.css')) ?>">
 

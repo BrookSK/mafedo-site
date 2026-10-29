@@ -1,27 +1,31 @@
 /* ==========================================================================
    Mafedo Engenharia — Frontend institucional
    Estética: moderna, clean, premium, arquitetônica.
-   Paleta: navy #01071F / branco #FEFEFE / laranja #F56208 (acento) /
-           azul institucional #082859 / terracota #B95F2F.
+   Paleta (identidade da logo): navy #01071F / azul da marca #0B2A5B /
+           cobre #B8693A (acento) / branco #FEFEFE.
+   Tipografia: Quicksand (mesma família da logo).
+   Obs.: a variável --orange foi mantida por compatibilidade, mas agora
+   carrega o tom COBRE da logo (mais sóbrio, adequado ao alto padrão).
    ========================================================================== */
 
 :root {
     --navy: #01071F;
-    --navy-2: #082859;
-    --orange: #F56208;
-    --orange-2: #B95F2F;
+    --navy-2: #0B2A5B;
+    --orange: #B8693A;
+    --orange-hover: #9F582F;
+    --orange-2: #D08A5C;
     --white: #FEFEFE;
 
-    --ink: #10131c;
-    --muted: #5c6475;
-    --line: #e6e9f0;
-    --soft: #f5f7fb;
+    --ink: #111522;
+    --muted: #5f6676;
+    --line: #e7e5e1;
+    --soft: #f7f5f2;
 
     --maxw: 1240px;
     --gutter: clamp(20px, 5vw, 64px);
 
-    --font-head: "Space Grotesk", "Inter", system-ui, sans-serif;
-    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-head: "Quicksand", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-body: "Quicksand", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
     --header-h: 84px;
     --ease: cubic-bezier(.22, .61, .36, 1);
@@ -41,7 +45,8 @@ body {
     color: var(--ink);
     background: var(--white);
     font-size: 17px;
-    line-height: 1.65;
+    font-weight: 500;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
@@ -52,11 +57,11 @@ a { color: inherit; text-decoration: none; }
 h1, h2, h3, h4 {
     font-family: var(--font-head);
     font-weight: 500;
-    line-height: 1.1;
-    letter-spacing: -.02em;
+    line-height: 1.12;
+    letter-spacing: -.01em;
     margin: 0 0 .4em;
 }
-h1 { font-size: clamp(2.3rem, 5.6vw, 4.2rem); font-weight: 600; }
+h1 { font-size: clamp(2.3rem, 5.6vw, 4.2rem); font-weight: 500; }
 h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
 h3 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); }
 p { margin: 0 0 1em; }
@@ -92,7 +97,7 @@ p { margin: 0 0 1em; }
     transition: transform .25s var(--ease), background .25s, color .25s, border-color .25s;
     position: relative;
 }
-.btn:hover { transform: translateY(-2px); background: #d9560a; }
+.btn:hover { transform: translateY(-2px); background: var(--orange-hover); }
 .btn--outline { --bg: transparent; --fg: var(--white); border-color: rgba(255,255,255,.3); }
 .btn--outline:hover { background: transparent; border-color: var(--orange); color: #fff; transform: translateY(-2px); }
 .btn--dark { --bg: var(--navy); --fg: #fff; }
@@ -127,7 +132,11 @@ body.no-hero .site-header {
 body.no-hero .site-header.is-solid { height: 68px; }
 /* Lockup da marca: wordmark tipográfico "MAFEDO." + tag "ENGENHARIA" na base */
 .brand { display: inline-flex; align-items: baseline; gap: 9px; color: #fff; line-height: 1; }
-.brand__img { height: 46px; width: auto; align-self: center; }
+/* A logo horizontal tem proporção ~1.9:1; alturas generosas para o nome ficar legível */
+.brand__img { height: 70px; width: auto; align-self: center; transition: height .35s var(--ease); }
+.site-header.is-solid .brand__img { height: 56px; }
+.footer-brand .brand__img { height: 96px; }
+@media (max-width: 760px) { .brand__img, .site-header.is-solid .brand__img { height: 54px; } }
 .brand__word {
     font-family: var(--font-head); font-weight: 700; font-size: 1.5rem;
     line-height: 1; letter-spacing: .02em; color: #fff;
@@ -568,7 +577,7 @@ body.no-hero .site-header.is-solid { height: 68px; }
     content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 0;
     background: var(--orange); transition: width .4s var(--ease);
 }
-.svc-row:hover { padding-left: 20px; background: linear-gradient(90deg, rgba(245,98,8,.05), transparent 60%); }
+.svc-row:hover { padding-left: 20px; background: linear-gradient(90deg, rgba(184,105,58,.05), transparent 60%); }
 .svc-row:hover::after { width: 100%; }
 .svc-row__ico {
     width: 54px; height: 54px; border: 1px solid var(--line); border-radius: 50%;
@@ -576,7 +585,7 @@ body.no-hero .site-header.is-solid { height: 68px; }
     transition: background .3s, border-color .3s;
 }
 .svc-row__ico svg { width: 24px; height: 24px; }
-.svc-row:hover .svc-row__ico { background: rgba(245,98,8,.1); border-color: rgba(245,98,8,.4); }
+.svc-row:hover .svc-row__ico { background: rgba(184,105,58,.1); border-color: rgba(184,105,58,.4); }
 .svc-row__title { font-family: var(--font-head); font-size: clamp(1.3rem, 2.6vw, 2rem); font-weight: 500; line-height: 1.1; letter-spacing: -.01em; }
 .svc-row__desc { color: var(--muted); font-size: .98rem; margin-top: 6px; max-width: 52ch; }
 .svc-row__go {
@@ -615,17 +624,17 @@ body.no-hero .site-header.is-solid { height: 68px; }
     background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.09);
     transition: border-color .3s, background .3s, transform .3s var(--ease);
 }
-.diff:hover { border-color: rgba(245,98,8,.5); background: rgba(255,255,255,.05); transform: translateY(-3px); }
+.diff:hover { border-color: rgba(184,105,58,.5); background: rgba(255,255,255,.05); transform: translateY(-3px); }
 .diff__ico {
     width: 46px; height: 46px; display: grid; place-items: center; margin-bottom: 18px;
-    border-radius: 50%; background: rgba(245,98,8,.14); color: var(--orange);
+    border-radius: 50%; background: rgba(184,105,58,.14); color: var(--orange);
 }
 .diff__ico svg { width: 22px; height: 22px; }
 .diff h3 { font-weight: 500; font-size: 1.2rem; margin: 0 0 8px; color: #fff; }
 
 /* Variante clara (fundo off-white) — menos "tech", mais institucional */
 .diff-grid--light .diff { background: #fff; border-color: var(--line); }
-.diff-grid--light .diff:hover { border-color: rgba(245,98,8,.55); background: #fff; box-shadow: 0 16px 36px rgba(1,7,31,.07); }
+.diff-grid--light .diff:hover { border-color: rgba(184,105,58,.55); background: #fff; box-shadow: 0 16px 36px rgba(1,7,31,.07); }
 .diff-grid--light .diff h3 { color: var(--navy); }
 .diff-grid--light .diff .muted { color: var(--muted); }
 
@@ -665,7 +674,7 @@ body.no-hero .site-header.is-solid { height: 68px; }
 a.channel:hover { border-color: var(--orange); transform: translateY(-2px); box-shadow: 0 14px 30px rgba(1,7,31,.06); }
 .channel__ico {
     width: 44px; height: 44px; flex: none; border-radius: 50%;
-    display: grid; place-items: center; color: var(--orange); background: rgba(245,98,8,.1);
+    display: grid; place-items: center; color: var(--orange); background: rgba(184,105,58,.1);
 }
 .channel__ico svg { width: 22px; height: 22px; }
 .channel__body { display: flex; flex-direction: column; gap: 3px; }
@@ -691,7 +700,7 @@ a.channel:hover .channel__go { transform: translateX(4px); }
     padding: 13px 14px; transition: border-color .2s, box-shadow .2s;
 }
 .form-card .form input:focus, .form-card .form textarea:focus {
-    border-color: var(--orange); box-shadow: 0 0 0 3px rgba(245,98,8,.12); outline: none;
+    border-color: var(--orange); box-shadow: 0 0 0 3px rgba(184,105,58,.12); outline: none;
 }
 .form-card .form label { font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 7px; }
 .field.has-error input, .field.has-error textarea { border-color: #c0392b; }
@@ -738,4 +747,115 @@ a.channel:hover .channel__go { transform: translateX(4px); }
 
 @media (max-width: 860px) {
     .about-intro { grid-template-columns: 1fr; gap: 28px; }
+}
+
+
+/* ==========================================================================
+   REVISÃO DO CLIENTE — ALTO PADRÃO
+   Identidade da logo (Quicksand + navy + cobre), menos elementos "técnicos",
+   mais respiro e navegação curta (atalhos da Home em um clique).
+   ========================================================================== */
+
+/* Elementos decorativos "blueprint" desligados: visual mais limpo e sóbrio */
+.blueprint::before { display: none; }
+.ticked::before, .ticked::after { display: none; }
+.sx-index .sx-num { display: none; }
+.sx-index .sx-line { max-width: 36px; opacity: 1; }
+.sx-index .sx-label { color: var(--orange); opacity: 1; letter-spacing: .24em; }
+.proj-item__idx { display: none; }
+
+/* Eyebrow mais refinado (tracking amplo, traço fino em cobre) */
+.eyebrow { font-weight: 600; letter-spacing: .26em; font-size: .76rem; }
+.eyebrow::before { height: 1px; width: 36px; }
+.eyebrow--center { justify-content: center; }
+
+/* Títulos com mais leveza */
+.sx-head h2 { font-weight: 500; }
+.lead { font-weight: 500; }
+
+/* Botões: tracking leve e peso coerente com a fonte da marca */
+.btn { font-weight: 600; letter-spacing: .04em; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn--wa { --bg: #25D366; --fg: #fff; }
+.btn--wa:hover { background: #1ebe5a; }
+
+/* Header: linha fina em cobre ao rolar, reforçando a marca */
+.site-header.is-solid, body.no-hero .site-header { box-shadow: 0 1px 0 rgba(184,105,58,.25); }
+.nav a { font-weight: 600; letter-spacing: .02em; }
+
+/* Hero: overlay mais profundo e atalhos de navegação no rodapé do hero */
+.hero__overlay {
+    background:
+        linear-gradient(180deg, rgba(1,7,31,.55) 0%, rgba(1,7,31,.35) 45%, rgba(1,7,31,.88) 100%),
+        linear-gradient(90deg, rgba(1,7,31,.82) 0%, rgba(1,7,31,.3) 60%, rgba(1,7,31,0) 100%);
+}
+.hero h1 { font-weight: 500; }
+.hero__jump {
+    position: absolute; z-index: 1; left: 0; right: 0; bottom: 0;
+    display: flex; justify-content: center; flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,.12);
+    background: rgba(1,7,31,.35); backdrop-filter: blur(6px);
+}
+.hero__jump a {
+    flex: 1 1 0; text-align: center; padding: 20px 14px;
+    font-size: .78rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+    color: rgba(255,255,255,.75); transition: color .25s, background .25s;
+}
+.hero__jump a + a { border-left: 1px solid rgba(255,255,255,.1); }
+.hero__jump a:hover { color: #fff; background: rgba(184,105,58,.25); }
+.hero .btn-group { margin-bottom: 90px; }
+
+/* Âncoras da Home não ficam escondidas sob o header fixo */
+section[id] { scroll-margin-top: 60px; }
+
+/* Serviços: apenas o título (lista enxuta) */
+.svc-row { padding-block: 26px; }
+.svc-row__title { font-weight: 500; }
+
+/* Portfólio com 3 itens: 1 grande à esquerda + 2 empilhados à direita */
+.proj-item:first-child:nth-last-child(3) { grid-column: span 7; grid-row: span 2; aspect-ratio: auto; }
+.proj-item:first-child:nth-last-child(3) img { position: absolute; inset: 0; }
+.proj-item:first-child:nth-last-child(3) ~ .proj-item { grid-column: span 5; aspect-ratio: 5/4; }
+/* 2 itens: lado a lado */
+.proj-item:first-child:nth-last-child(2),
+.proj-item:first-child:nth-last-child(2) ~ .proj-item { grid-column: span 6; aspect-ratio: 4/3; }
+/* 1 item: largura total */
+.proj-item:only-child { grid-column: 1 / -1; aspect-ratio: 21/9; }
+.proj-item__title { font-weight: 600; }
+/* Cobre mais claro sobre fotos escuras (contraste) */
+.proj-item__cat, .project-card__cat { color: var(--orange-2); }
+
+/* Missão / visão / valores */
+.mvv__item { border-top-width: 2px; }
+.mvv__k { font-weight: 600; letter-spacing: .02em; }
+
+/* Faixa de contato rápido */
+.cta-band h2 { margin-top: 6px; }
+.cta-band__sub { color: #aeb9d0; margin: 0 auto; }
+.cta-band__actions { justify-content: center; margin-top: 32px; }
+
+/* Contato: atalhos WhatsApp e Instagram */
+.quick-links { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.quick-link {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 16px 18px; font-weight: 600; letter-spacing: .04em; color: #fff;
+    transition: transform .25s var(--ease), filter .25s, box-shadow .25s;
+}
+.quick-link svg { width: 22px; height: 22px; }
+.quick-link:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(1,7,31,.12); filter: brightness(1.05); }
+.quick-link--wa { background: #25D366; }
+.quick-link--ig { background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888); }
+.quick-link:only-child { grid-column: 1 / -1; }
+
+/* Rodapé: linha superior em cobre */
+.site-footer { border-top: 1px solid rgba(184,105,58,.35); }
+
+@media (max-width: 760px) {
+    .hero__jump { display: none; }   /* no mobile o menu já dá acesso direto */
+    .hero .btn-group { margin-bottom: 0; }
+    /* !important: sobrepõe as regras de layout por quantidade de itens acima */
+    .proj-item:nth-child(n) { grid-column: auto !important; grid-row: auto !important; aspect-ratio: 3/2 !important; }
+}
+@media (max-width: 420px) {
+    .quick-links { grid-template-columns: 1fr; }
 }

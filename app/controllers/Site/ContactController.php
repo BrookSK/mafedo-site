@@ -124,7 +124,7 @@ final class ContactController extends Controller
             . '<h2 style="color:#01071F">Novo contato pelo site</h2>'
             . $row('Nome', $d['name'])
             . $row('E-mail', $d['email'])
-            . $row('Telefone', $d['phone'])
+            . $row('WhatsApp', $d['phone'])
             . $row('Empresa', $d['company'])
             . $row('Assunto', $d['subject'])
             . '<p style="margin:12px 0 4px"><strong>Mensagem:</strong></p>'

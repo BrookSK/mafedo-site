@@ -1,7 +1,8 @@
 <?php
 use App\Models\Setting;
 $companyName = (string) Setting::get('company_name', 'Mafedo Engenharia');
-$logo = (string) (Setting::get('logo_header') ?: Setting::get('company_logo', ''));
+// Padrão: logo oficial horizontal em versão clara (o header é escuro).
+$logo = (string) (Setting::get('logo_header') ?: Setting::get('company_logo') ?: '/assets/images/brand/logo-horizontal-branco.png');
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/', '/') ?: '/';
 $navItems = [
     '/'         => 'Início',

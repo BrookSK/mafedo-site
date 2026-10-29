@@ -143,3 +143,28 @@ if (!function_exists('redirect')) {
         \App\Core\Response::redirect(str_starts_with($path, 'http') ? $path : url($path));
     }
 }
+
+if (!function_exists('whatsapp_link')) {
+    /**
+     * Link wa.me do WhatsApp da empresa (com mensagem padrão), a partir das
+     * configurações do painel. Retorna '' se não houver número cadastrado.
+     */
+    function whatsapp_link(?string $message = null): string
+    {
+        $number = preg_replace('/\D+/', '', (string) \App\Models\Setting::get('whatsapp_number', ''));
+        if ($number === '') {
+            return '';
+        }
+        $message ??= (string) \App\Models\Setting::get('whatsapp_message', '');
+        return 'https://wa.me/' . $number . ($message !== '' ? '?text=' . rawurlencode($message) : '');
+    }
+}
+
+if (!function_exists('instagram_url')) {
+    /** URL do Instagram da empresa (com fallback para o perfil oficial). */
+    function instagram_url(): string
+    {
+        $url = (string) \App\Models\Setting::get('social_instagram', '');
+        return $url !== '' ? $url : 'https://www.instagram.com/mafedo_engenharia/';
+    }
+}

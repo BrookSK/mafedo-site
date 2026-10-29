@@ -7,8 +7,8 @@ $email = (string) Setting::get('contact_email', '');
 $phone = (string) Setting::get('contact_phone', '');
 $address = (string) Setting::get('contact_address', '');
 $hours = (string) Setting::get('business_hours', '');
-$waNumber = preg_replace('/\D+/', '', (string) Setting::get('whatsapp_number', ''));
-$waMsg = (string) Setting::get('whatsapp_message', 'Olá! Gostaria de falar sobre um projeto.');
+$waLink = whatsapp_link();
+$igLink = instagram_url();
 
 // Fallbacks: canais sempre visíveis, mesmo sem cadastro no painel.
 $phoneDisplay = $phone !== '' ? $phone : 'Em breve';
@@ -32,21 +32,10 @@ $flashError = Session::flash('error');
             <!-- Canais de atendimento (cards sempre visíveis) -->
             <div class="reveal">
                 <div class="channels">
-                    <?php if ($waNumber !== ''): ?>
-                    <a class="channel channel--wa" href="https://wa.me/<?= e($waNumber) ?><?= $waMsg !== '' ? '?text=' . rawurlencode($waMsg) : '' ?>" target="_blank" rel="noopener">
-                        <span class="channel__ico"><?= icon('whatsapp') ?></span>
-                        <span class="channel__body">
-                            <span class="channel__k">WhatsApp</span>
-                            <span class="channel__v">Conversar agora</span>
-                        </span>
-                        <span class="channel__go"><?= icon('arrow') ?></span>
-                    </a>
-                    <?php endif; ?>
-
                     <a class="channel" <?= $phone !== '' ? 'href="tel:' . e(preg_replace('/\D+/', '', $phone)) . '"' : '' ?>>
                         <span class="channel__ico"><?= icon('phone') ?></span>
                         <span class="channel__body">
-                            <span class="channel__k">Telefone</span>
+                            <span class="channel__k">Telefone · WhatsApp</span>
                             <span class="channel__v"><?= e($phoneDisplay) ?></span>
                         </span>
                     </a>
@@ -74,6 +63,18 @@ $flashError = Session::flash('error');
                             <span class="channel__v"><?= e($hoursDisplay) ?></span>
                         </span>
                     </div>
+                </div>
+
+                <!-- Atalhos diretos: WhatsApp e Instagram -->
+                <div class="quick-links">
+                    <?php if ($waLink !== ''): ?>
+                    <a class="quick-link quick-link--wa" href="<?= e($waLink) ?>" target="_blank" rel="noopener">
+                        <?= icon('whatsapp') ?><span>WhatsApp</span>
+                    </a>
+                    <?php endif; ?>
+                    <a class="quick-link quick-link--ig" href="<?= e($igLink) ?>" target="_blank" rel="noopener">
+                        <?= icon('instagram') ?><span>Instagram</span>
+                    </a>
                 </div>
             </div>
 
@@ -107,8 +108,8 @@ $flashError = Session::flash('error');
                         </div>
                         <div class="row">
                             <div class="field">
-                                <label for="phone">Telefone</label>
-                                <input id="phone" name="phone" value="<?= e(old('phone')) ?>">
+                                <label for="phone">WhatsApp</label>
+                                <input id="phone" type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="(11) 90000-0000" value="<?= e(old('phone')) ?>">
                             </div>
                             <div class="field">
                                 <label for="company">Empresa</label>

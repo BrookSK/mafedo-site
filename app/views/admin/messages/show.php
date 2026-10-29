@@ -15,7 +15,7 @@
         <div class="card__body">
             <p><strong>Nome:</strong> <?= e($message['name']) ?></p>
             <p><strong>E-mail:</strong> <a href="mailto:<?= e($message['email']) ?>"><?= e($message['email']) ?></a></p>
-            <?php if (!empty($message['phone'])): ?><p><strong>Telefone:</strong> <?= e($message['phone']) ?></p><?php endif; ?>
+            <?php if (!empty($message['phone'])): ?><p><strong>WhatsApp:</strong> <?= e($message['phone']) ?></p><?php endif; ?>
             <?php if (!empty($message['company'])): ?><p><strong>Empresa:</strong> <?= e($message['company']) ?></p><?php endif; ?>
             <p><strong>Data:</strong> <?= e(date('d/m/Y H:i', strtotime((string) $message['created_at']))) ?></p>
             <p><strong>E-mail enviado:</strong> <?= (int) ($message['email_sent'] ?? 0) === 1 ? 'Sim' : 'Não (apenas salvo)' ?></p>

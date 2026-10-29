@@ -3,11 +3,12 @@ use App\Models\Service;
 use App\Models\Setting;
 
 $companyName = (string) Setting::get('company_name', 'Mafedo Engenharia');
-$logo = (string) (Setting::get('logo_footer') ?: Setting::get('company_logo', ''));
+$logo = (string) (Setting::get('logo_footer') ?: Setting::get('company_logo') ?: '/assets/images/brand/logo-horizontal-branco.png');
 $email = (string) Setting::get('contact_email', '');
 $phone = (string) Setting::get('contact_phone', '');
 $address = (string) Setting::get('contact_address', '');
 $hours = (string) Setting::get('business_hours', '');
+$waLink = whatsapp_link();
 $socials = [
     'Instagram' => (string) Setting::get('social_instagram', ''),
     'Facebook'  => (string) Setting::get('social_facebook', ''),
@@ -27,7 +28,7 @@ if (!empty($footerServices)) {
         $serviceLinks[] = ['label' => $s['title'], 'href' => url('/servicos/' . $s['slug'])];
     }
 } else {
-    foreach (['Projetos Estruturais', 'Gestão de Obras', 'Consultoria Técnica', 'Reformas e Retrofit'] as $label) {
+    foreach (['Construção Civil', 'Reformas'] as $label) {
         $serviceLinks[] = ['label' => $label, 'href' => url('/servicos')];
     }
 }
@@ -44,7 +45,7 @@ if (!empty($footerServices)) {
                         <span class="brand__tag">ENGENHARIA</span>
                     <?php endif; ?>
                 </a>
-                <p class="footer-desc">Engenharia com rigor técnico, segurança e capacidade de execução para transformar projetos em resultados.</p>
+                <p class="footer-desc">Construção e reforma de alto padrão, com rigor técnico, segurança e capacidade de execução.</p>
                 <div class="socials">
                     <?php
                     $anySocial = false;
@@ -82,6 +83,7 @@ if (!empty($footerServices)) {
                 <h4>Contato</h4>
                 <ul class="footer-links">
                     <li><a href="tel:<?= e($phone !== '' ? preg_replace('/\D+/', '', $phone) : '') ?>"><?= e($phone !== '' ? $phone : 'Telefone em breve') ?></a></li>
+                    <?php if ($waLink !== ''): ?><li><a href="<?= e($waLink) ?>" target="_blank" rel="noopener">WhatsApp</a></li><?php endif; ?>
                     <li><a href="mailto:<?= e($email !== '' ? $email : 'contato@mafedo.com.br') ?>"><?= e($email !== '' ? $email : 'contato@mafedo.com.br') ?></a></li>
                     <?php if ($address !== ''): ?><li><?= nl2br(e($address)) ?></li><?php else: ?><li>São Paulo, SP</li><?php endif; ?>
                     <?php if ($hours !== ''): ?><li><?= e($hours) ?></li><?php endif; ?>
