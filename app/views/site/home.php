@@ -1,6 +1,6 @@
 <?php use App\Models\Setting; ?>
 
-<!-- 01 — HERO -->
+<!-- HERO -->
 <section class="hero">
     <div class="hero__media">
         <?php if (!empty($hero['image'])): ?>
@@ -35,7 +35,7 @@
     </nav>
 </section>
 
-<!-- 02 — A MAFEDO -->
+<!-- A MAFEDO -->
 <section class="section" id="intro">
     <div class="container split">
         <div class="split__content reveal">
@@ -54,7 +54,7 @@
     </div>
 </section>
 
-<!-- 03 — SERVIÇOS -->
+<!-- SERVIÇOS -->
 <?php if (!empty($featuredServices)): ?>
 <section class="section section--soft" id="servicos">
     <div class="container">
@@ -75,7 +75,7 @@
 </section>
 <?php endif; ?>
 
-<!-- 04 — PORTFÓLIO -->
+<!-- PORTFÓLIO -->
 <section class="section" id="portfolio">
     <div class="container">
         <div class="sx-head reveal">
@@ -107,7 +107,7 @@
     </div>
 </section>
 
-<!-- 05 — MISSÃO, VISÃO E VALORES -->
+<!-- MISSÃO, VISÃO E VALORES -->
 <section class="section section--soft" id="valores">
     <div class="container">
         <div class="sx-head reveal">
@@ -118,7 +118,7 @@
     </div>
 </section>
 
-<!-- 06 — DIFERENCIAIS -->
+<!-- DIFERENCIAIS -->
 <section class="section">
     <div class="container">
         <div class="sx-head reveal">
@@ -144,5 +144,5 @@
     </div>
 </section>
 
-<!-- 07 — CONTATO RÁPIDO -->
+<!-- CONTATO RÁPIDO -->
 <?php $this->partial('site/partials/contact-band'); ?>

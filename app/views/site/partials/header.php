@@ -18,7 +18,7 @@ $isActive = static function (string $href) use ($path): string {
 ?>
 <header class="site-header">
     <div class="container">
-        <a class="brand" href="<?= e(url('/')) ?>" aria-label="<?= e($companyName) ?> — página inicial">
+        <a class="brand" href="<?= e(url('/')) ?>" aria-label="<?= e($companyName) ?>, página inicial">
             <?php if ($logo !== ''): ?>
                 <img src="<?= e(upload_url($logo)) ?>" alt="<?= e($companyName) ?>" class="brand__img">
             <?php else: ?>
