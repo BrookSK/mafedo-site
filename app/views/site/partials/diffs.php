@@ -11,7 +11,8 @@ if (!$diffs) return;
             <p class="eyebrow"><?= e(c('geral.diff_eyebrow')) ?></p>
             <h2><?= e(c('geral.diff_title')) ?></h2>
         </div>
-        <div class="diff-grid diff-grid--light diff-grid--3<?= $full ? ' diff-grid--full' : '' ?>">
+        <?php // Página inicial: todos em uma linha. A Mafedo: grade equilibrada (5 itens = 3 em cima + 2 embaixo, ocupando a largura toda). ?>
+        <div class="diff-grid diff-grid--light <?= $full ? 'diff-grid--balanced' : 'diff-grid--row' ?>" style="--n:<?= count($diffs) ?>">
             <?php foreach ($diffs as $i => $d):
                 $text = $full ? ($d['text'] !== '' ? $d['text'] : $d['summary']) : ($d['summary'] !== '' ? $d['summary'] : $d['text']); ?>
                 <div class="diff reveal" data-delay="<?= $i % 3 ?>">

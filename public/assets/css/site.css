@@ -864,20 +864,37 @@ section[id] { scroll-margin-top: 60px; }
    CONTEÚDO DO CLIENTE (nov/2026): números, diferenciais completos, textos
    ========================================================================== */
 
-/* Nossa trajetória em números */
-.numbers-section { padding-block: clamp(56px, 7vw, 96px); border-bottom: 1px solid var(--line); }
-.numbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
-.number { padding: 34px 32px 6px 0; display: flex; flex-direction: column; gap: 4px; }
-.number + .number { border-left: 1px solid var(--line); padding-left: 32px; }
-.number__value { font-family: var(--font-head); font-weight: 500; font-size: clamp(2.6rem, 5vw, 3.8rem); line-height: 1; color: var(--orange); letter-spacing: -.02em; }
-.number__label { font-family: var(--font-head); font-weight: 600; font-size: 1.1rem; color: var(--navy); margin-top: 8px; }
-.number__text { color: var(--muted); font-size: .98rem; margin: 6px 0 0; max-width: 34ch; }
+/* Nossa trajetória em números: título + números à esquerda, foto à direita */
+.numbers-section { padding-block: clamp(64px, 8vw, 110px); }
+.numbers-split { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(32px, 6vw, 90px); align-items: center; }
+.numbers-split--noimg { grid-template-columns: 1fr; }
+.numbers-split .sx-head { margin-bottom: 30px; }
+.numbers-split__media { margin: 0; }
+.numbers-split__media img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; box-shadow: 0 24px 50px rgba(1,7,31,.1); }
+.numbers { display: grid; border-top: 1px solid var(--line); }
+.number { display: grid; grid-template-columns: 270px 1fr; gap: 28px; align-items: center; padding: 26px 0; border-bottom: 1px solid var(--line); }
+.number__value { font-family: var(--font-head); font-weight: 500; font-size: clamp(2.2rem, 3.3vw, 2.9rem); line-height: 1; color: var(--orange); letter-spacing: -.02em; min-width: 0; overflow-wrap: break-word; }
+.number__body { display: flex; flex-direction: column; gap: 4px; }
+.number__label { font-family: var(--font-head); font-weight: 600; font-size: 1.08rem; color: var(--navy); }
+.number__text { color: var(--muted); font-size: .95rem; line-height: 1.55; }
 
-/* Diferenciais em 3 colunas (5 itens = 3 + 2) */
-.diff-grid--3 { grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.diff .muted p { margin: 0 0 .8em; }
-.diff .muted p:last-child { margin-bottom: 0; }
-.diff-grid--full .diff { padding: 34px 30px; }
+/* Diferenciais: blocos sempre preenchendo a linha (sem bloco "sobrando") */
+.diff .muted p { margin: 0; }
+.diff h3 { font-size: 1.12rem; }
+/* Página inicial: todos lado a lado em uma linha */
+.diff-grid--row { grid-template-columns: repeat(var(--n, 5), 1fr); gap: 16px; }
+.diff-grid--row .diff { padding: 26px 22px; }
+.diff-grid--row .diff__ico { margin-bottom: 14px; }
+.diff-grid--row .diff .muted { font-size: .92rem; line-height: 1.5; }
+/* A Mafedo: grade de 6 colunas; 3 por linha e, se a última linha tiver 2, eles dividem a largura */
+.diff-grid--balanced { grid-template-columns: repeat(6, 1fr); gap: 20px; }
+.diff-grid--balanced .diff { grid-column: span 2; }
+.diff-grid--balanced .diff:nth-child(3n+1):nth-last-child(2),
+.diff-grid--balanced .diff:nth-child(3n+1):nth-last-child(2) + .diff { grid-column: span 3; }
+.diff-grid--balanced .diff:nth-child(3n+1):last-child { grid-column: 1 / -1; }
+.diff-grid--balanced .diff:first-child:nth-last-child(4),
+.diff-grid--balanced .diff:first-child:nth-last-child(4) ~ .diff { grid-column: span 3; }
+.diff-grid--balanced .diff .muted { font-size: .96rem; line-height: 1.6; }
 
 /* Textos com parágrafos */
 .split__content .lead + .lead { margin-top: -.2em; }
@@ -891,12 +908,25 @@ section[id] { scroll-margin-top: 60px; }
 /* Página do segmento: imagem com mesma proporção do texto */
 .split__media img { box-shadow: 0 24px 50px rgba(1,7,31,.08); }
 
+/* Telas médias: linha única vira grade equilibrada de 6 colunas */
+@media (max-width: 1100px) {
+    .diff-grid--row { grid-template-columns: repeat(6, 1fr); gap: 18px; }
+    .diff-grid--row .diff { grid-column: span 2; }
+    .diff-grid--row .diff:nth-child(3n+1):nth-last-child(2),
+    .diff-grid--row .diff:nth-child(3n+1):nth-last-child(2) + .diff { grid-column: span 3; }
+    .diff-grid--row .diff:nth-child(3n+1):last-child { grid-column: 1 / -1; }
+    .diff-grid--row .diff:first-child:nth-last-child(4),
+    .diff-grid--row .diff:first-child:nth-last-child(4) ~ .diff { grid-column: span 3; }
+}
+@media (max-width: 1180px) and (min-width: 981px) {
+    .number { grid-template-columns: 1fr; gap: 8px; }
+}
 @media (max-width: 980px) {
-    .diff-grid--3 { grid-template-columns: repeat(2, 1fr); }
+    .numbers-split { grid-template-columns: 1fr; }
+    .numbers-split__media img { aspect-ratio: 4/3; }
 }
 @media (max-width: 760px) {
-    .numbers { grid-template-columns: 1fr; }
-    .number { padding: 24px 0; }
-    .number + .number { border-left: none; border-top: 1px solid var(--line); padding-left: 0; }
-    .diff-grid--3 { grid-template-columns: 1fr; }
+    .number { grid-template-columns: 1fr; gap: 8px; padding: 22px 0; }
+    .diff-grid--row, .diff-grid--balanced { grid-template-columns: 1fr; }
+    .diff-grid--row .diff, .diff-grid--balanced .diff { grid-column: auto !important; }
 }
