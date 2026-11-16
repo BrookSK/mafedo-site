@@ -1,16 +1,24 @@
 <?php
-// Missão, visão e valores — usado na Home e em "A Mafedo".
-$blocks = [
-    ['Missão', 'Entregar construções e reformas de alto padrão com excelência técnica, segurança e compromisso com o resultado dos nossos clientes.'],
-    ['Visão', 'Ser reconhecida como referência em engenharia pela qualidade do acabamento e pela capacidade de execução de cada obra.'],
-    ['Valores', 'Ética, trabalho em equipe, rigor técnico, responsabilidade, prazo e transparência em cada obra.'],
-];
+// Missão, visão e valores (Painel > Textos e imagens do site > Geral).
+$blocks = array_filter([
+    'Missão'  => c('geral.mission'),
+    'Visão'   => c('geral.vision'),
+    'Valores' => c('geral.values'),
+], static fn ($t) => trim($t) !== '');
 ?>
-<div class="mvv">
-    <?php foreach ($blocks as $i => $b): ?>
-        <div class="mvv__item reveal" data-delay="<?= $i ?>">
-            <span class="mvv__k"><?= e($b[0]) ?></span>
-            <p><?= e($b[1]) ?></p>
+<section class="section section--soft" id="valores">
+    <div class="container">
+        <div class="sx-head reveal">
+            <p class="eyebrow"><?= e(c('geral.mvv_eyebrow')) ?></p>
+            <h2><?= e(c('geral.mvv_title')) ?></h2>
         </div>
-    <?php endforeach; ?>
-</div>
+        <div class="mvv">
+            <?php $i = 0; foreach ($blocks as $label => $text): ?>
+                <div class="mvv__item reveal" data-delay="<?= $i++ ?>">
+                    <span class="mvv__k"><?= e($label) ?></span>
+                    <p><?= nl2br(e($text)) ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>

@@ -14,8 +14,8 @@ final class ServiceController extends Controller
     {
         $this->view('site/services', [
             'meta' => [
-                'title'       => 'Serviços · ' . Setting::get('company_name', 'Mafedo Engenharia'),
-                'description' => 'Conheça os serviços de engenharia oferecidos pela Mafedo.',
+                'title'       => c('servicos.seo_title') ?: 'Serviços · ' . Setting::get('company_name', 'Mafedo Engenharia'),
+                'description' => c('servicos.seo_description'),
             ],
             'services' => (new Service())->active(),
         ]);
@@ -44,6 +44,7 @@ final class ServiceController extends Controller
                 'title'       => ($service['seo_title'] ?: $service['title']) . ' · Mafedo Engenharia',
                 'description' => $service['seo_description'] ?: str_excerpt((string) $service['short_description'], 160),
                 'og_type'     => 'article',
+                'og_image'    => !empty($service['image']) ? upload_url($service['image']) : null,
                 'structured'  => $structured,
             ],
             'service' => $service,

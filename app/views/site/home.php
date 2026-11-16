@@ -1,72 +1,85 @@
-<?php use App\Models\Setting; ?>
+<?php
+// Todos os textos e imagens: Painel > Textos e imagens do site > Página inicial / Geral.
+$waLink = whatsapp_link();
+$jumps = array_filter([
+    '#intro'          => c('home.jump_about'),
+    '#servicos'       => c('home.jump_services'),
+    '#portfolio'      => c('home.jump_projects'),
+    '#valores'        => c('home.jump_values'),
+    '#contato-rapido' => c('home.jump_contact'),
+], static fn ($l) => trim($l) !== '');
+?>
 
 <!-- HERO -->
 <section class="hero">
     <div class="hero__media">
-        <?php if (!empty($hero['image'])): ?>
-            <img src="<?= e(upload_url($hero['image'])) ?>" alt="" fetchpriority="high">
-        <?php else: ?>
-            <img src="<?= e(asset('images/site/home-hero.jpg')) ?>" alt="" fetchpriority="high">
-        <?php endif; ?>
+        <img src="<?= e(upload_url(c('home.hero_image'))) ?>" alt="" fetchpriority="high">
     </div>
     <div class="hero__overlay"></div>
     <div class="container">
         <div class="hero__inner">
-            <p class="eyebrow"><?= e($hero['eyebrow']) ?></p>
-            <h1><?= e($hero['title']) ?></h1>
-            <?php if (!empty($hero['subtitle'])): ?><p class="lead"><?= e($hero['subtitle']) ?></p><?php endif; ?>
+            <?php if (c('home.hero_eyebrow') !== ''): ?><p class="eyebrow"><?= e(c('home.hero_eyebrow')) ?></p><?php endif; ?>
+            <h1><?= e(c('home.hero_title')) ?></h1>
+            <?php if (c('home.hero_subtitle') !== ''): ?><p class="lead"><?= nl2br(e(c('home.hero_subtitle'))) ?></p><?php endif; ?>
             <div class="btn-group">
-                <a class="btn" href="#portfolio">Ver portfólio <span class="arrow">→</span></a>
-                <?php if (whatsapp_link() !== ''): ?>
-                    <a class="btn btn--outline" href="<?= e(whatsapp_link()) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?> Falar no WhatsApp</a>
-                <?php else: ?>
-                    <a class="btn btn--outline" href="<?= e(url('/contato')) ?>">Fale conosco</a>
+                <?php if (c('home.hero_btn1') !== ''): ?>
+                    <a class="btn" href="#portfolio"><?= e(c('home.hero_btn1')) ?> <span class="arrow">→</span></a>
+                <?php endif; ?>
+                <?php if (c('home.hero_btn2') !== ''): ?>
+                    <?php if ($waLink !== ''): ?>
+                        <a class="btn btn--outline" href="<?= e($waLink) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?> <?= e(c('home.hero_btn2')) ?></a>
+                    <?php else: ?>
+                        <a class="btn btn--outline" href="<?= e(url('/contato')) ?>"><?= e(c('home.hero_btn2')) ?></a>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>
     </div>
-    <!-- Atalhos: o visitante chega a qualquer parte da página em um clique -->
+    <?php if ($jumps): ?>
     <nav class="hero__jump" aria-label="Atalhos da página">
-        <a href="#intro">A Mafedo</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#portfolio">Portfólio</a>
-        <a href="#valores">Missão e valores</a>
-        <a href="#contato-rapido">Contato</a>
+        <?php foreach ($jumps as $href => $label): ?><a href="<?= e($href) ?>"><?= e($label) ?></a><?php endforeach; ?>
     </nav>
+    <?php endif; ?>
 </section>
 
-<!-- A MAFEDO -->
+<!-- SOBRE A MAFEDO -->
 <section class="section" id="intro">
     <div class="container split">
         <div class="split__content reveal">
-            <p class="eyebrow">A Mafedo</p>
-            <h2>Soluções de engenharia com precisão e compromisso.</h2>
-            <?php if (!empty($aboutText)): ?>
-                <p class="lead"><?= e($aboutText) ?></p>
+            <?php if (c('home.about_eyebrow') !== ''): ?><p class="eyebrow"><?= e(c('home.about_eyebrow')) ?></p><?php endif; ?>
+            <h2><?= e(c('home.about_title')) ?></h2>
+            <?= content_paragraphs(c('home.about_text'), 'lead') ?>
+            <?php if (c('home.about_btn') !== ''): ?>
+                <div class="btn-group" style="margin-top:28px">
+                    <a class="btn btn--dark" href="<?= e(url('/sobre')) ?>"><?= e(c('home.about_btn')) ?> <span class="arrow">→</span></a>
+                </div>
             <?php endif; ?>
-            <div class="btn-group" style="margin-top:28px">
-                <a class="btn btn--dark" href="<?= e(url('/sobre')) ?>">Conheça a Mafedo <span class="arrow">→</span></a>
-            </div>
         </div>
         <div class="split__media reveal" data-delay="1">
-            <img src="<?= e(Setting::get('home_hero_image') ? upload_url((string) Setting::get('home_hero_image')) : asset('images/site/home-intro.jpg')) ?>" alt="Equipe de engenharia da Mafedo em obra" loading="lazy">
+            <img src="<?= e(upload_url(c('home.about_image'))) ?>" alt="<?= e(c('home.about_title')) ?>" loading="lazy">
         </div>
     </div>
 </section>
 
-<!-- SERVIÇOS -->
+<!-- NÚMEROS -->
+<?php $this->partial('site/partials/numbers'); ?>
+
+<!-- SEGMENTOS -->
 <?php if (!empty($featuredServices)): ?>
 <section class="section section--soft" id="servicos">
     <div class="container">
         <div class="sx-head reveal">
-            <p class="eyebrow">O que fazemos</p>
-            <h2>Do projeto à entrega.</h2>
+            <?php if (c('home.services_eyebrow') !== ''): ?><p class="eyebrow"><?= e(c('home.services_eyebrow')) ?></p><?php endif; ?>
+            <h2><?= e(c('home.services_title')) ?></h2>
         </div>
         <div class="svc-list">
             <?php foreach ($featuredServices as $i => $s): ?>
                 <a class="svc-row reveal" data-delay="<?= $i % 3 ?>" href="<?= e(url('/servicos/' . $s['slug'])) ?>">
-                    <span class="svc-row__ico"><?= icon(service_icon_name($s['slug'] . ' ' . $s['title'])) ?></span>
-                    <span class="svc-row__title"><?= e($s['title']) ?></span>
+                    <span class="svc-row__ico"><?= icon(service_icon_name(($s['icon'] ?? '') ?: $s['slug'] . ' ' . $s['title'])) ?></span>
+                    <span>
+                        <span class="svc-row__title"><?= e($s['title']) ?></span>
+                        <?php if (!empty($s['short_description'])): ?><span class="svc-row__desc"><?= e($s['short_description']) ?></span><?php endif; ?>
+                    </span>
                     <span class="svc-row__go" aria-hidden="true"><?= icon('arrow') ?></span>
                 </a>
             <?php endforeach; ?>
@@ -79,14 +92,12 @@
 <section class="section" id="portfolio">
     <div class="container">
         <div class="sx-head reveal">
-            <p class="eyebrow">Portfólio</p>
-            <h2>Projetos que traduzem capacidade de execução.</h2>
+            <?php if (c('home.projects_eyebrow') !== ''): ?><p class="eyebrow"><?= e(c('home.projects_eyebrow')) ?></p><?php endif; ?>
+            <h2><?= e(c('home.projects_title')) ?></h2>
         </div>
 
         <?php if (empty($featuredProjects)): ?>
-            <div class="empty-state reveal">
-                <p>Os projetos em destaque aparecerão aqui assim que forem cadastrados no painel.</p>
-            </div>
+            <div class="empty-state reveal"><p><?= e(c('projetos.empty_text')) ?></p></div>
         <?php else: ?>
             <div class="proj-editorial">
                 <?php foreach ($featuredProjects as $i => $p): ?>
@@ -100,49 +111,20 @@
                     </a>
                 <?php endforeach; ?>
             </div>
-            <div class="btn-group" style="margin-top:40px">
-                <a class="btn btn--ghost-dark" href="<?= e(url('/projetos')) ?>">Ver todos os projetos</a>
-            </div>
+            <?php if (c('home.projects_btn') !== ''): ?>
+                <div class="btn-group" style="margin-top:40px">
+                    <a class="btn btn--ghost-dark" href="<?= e(url('/projetos')) ?>"><?= e(c('home.projects_btn')) ?></a>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 </section>
 
-<!-- MISSÃO, VISÃO E VALORES -->
-<section class="section section--soft" id="valores">
-    <div class="container">
-        <div class="sx-head reveal">
-            <p class="eyebrow">O que nos guia</p>
-            <h2>Missão, visão e valores.</h2>
-        </div>
-        <?php $this->partial('site/partials/mvv'); ?>
-    </div>
-</section>
+<!-- DIFERENCIAIS (resumo) -->
+<?php $this->partial('site/partials/diffs', ['full' => false]); ?>
 
-<!-- DIFERENCIAIS -->
-<section class="section">
-    <div class="container">
-        <div class="sx-head reveal">
-            <p class="eyebrow">Por que a Mafedo</p>
-            <h2>O que sustenta cada entrega.</h2>
-        </div>
-        <div class="diff-grid diff-grid--light">
-            <?php
-            $diffs = [
-                ['people', 'Equipe especializada', 'Profissionais capacitados para execução dentro do mais elevado padrão de qualidade.'],
-                ['gear', 'Gerenciamento', 'Rotina coordenada com foco em qualidade, alinhamento e redução de custos.'],
-                ['clock', 'Prazo', 'Uso eficiente dos recursos para entregar atendendo às expectativas do cliente.'],
-                ['shield', 'Ética e confiança', 'Honestidade e compromisso em cada relação com clientes e parceiros.'],
-            ];
-            foreach ($diffs as $i => $d): ?>
-                <div class="diff reveal" data-delay="<?= $i % 3 ?>">
-                    <span class="diff__ico"><?= icon($d[0]) ?></span>
-                    <h3><?= e($d[1]) ?></h3>
-                    <p class="muted"><?= e($d[2]) ?></p>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
+<!-- MISSÃO, VISÃO E VALORES -->
+<?php $this->partial('site/partials/mvv'); ?>
 
 <!-- CONTATO RÁPIDO -->
 <?php $this->partial('site/partials/contact-band'); ?>

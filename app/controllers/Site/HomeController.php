@@ -17,8 +17,9 @@ final class HomeController extends Controller
 
         $this->view('site/home', [
             'meta' => [
-                'title'       => $companyName . ' · Engenharia que transforma projetos em resultados',
-                'description' => (string) Setting::get('seo_meta_description', ''),
+                'title'       => c('home.seo_title') ?: $companyName,
+                'description' => c('home.seo_description'),
+                'og_image'    => upload_url(c('home.hero_image')),
                 'hero_header' => true,
                 'structured'  => [
                     '@context' => 'https://schema.org',
@@ -29,13 +30,6 @@ final class HomeController extends Controller
                     'telephone' => Setting::get('contact_phone', ''),
                 ],
             ],
-            'hero' => [
-                'eyebrow'  => (string) Setting::get('home_hero_eyebrow', $companyName),
-                'title'    => (string) Setting::get('home_hero_title', 'Engenharia que transforma projetos em resultados.'),
-                'subtitle' => (string) Setting::get('home_hero_subtitle', ''),
-                'image'    => (string) Setting::get('home_hero_image', ''),
-            ],
-            'aboutText'        => (string) Setting::get('home_about_text', ''),
             'featuredServices' => (new Service())->featured(6),
             'featuredProjects' => (new Project())->featured(6),
         ]);

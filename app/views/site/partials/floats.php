@@ -14,10 +14,18 @@ $waLink = whatsapp_link();
 <?php endif; ?>
 
 <div class="cookie" style="display:none" role="dialog" aria-label="Aviso de cookies">
-    <p>Usamos cookies para melhorar sua experiência de navegação. Ao continuar, você concorda com nossa
-        <a href="<?= e(url('/politica-de-privacidade')) ?>" style="color:var(--orange)">Política de Privacidade</a>.</p>
+    <?php
+    // "Política de Privacidade" no texto vira link automaticamente.
+    $cookieText = e(c('geral.cookie_text'));
+    $cookieText = str_replace(
+        'Política de Privacidade',
+        '<a href="' . e(url('/politica-de-privacidade')) . '" style="color:var(--orange)">Política de Privacidade</a>',
+        $cookieText
+    );
+    ?>
+    <p><?= $cookieText ?></p>
     <div class="btn-group">
-        <button class="btn btn--ghost-dark" data-cookie="rejected" type="button">Rejeitar</button>
-        <button class="btn" data-cookie="accepted" type="button">Aceitar</button>
+        <button class="btn btn--ghost-dark" data-cookie="rejected" type="button"><?= e(c('geral.cookie_reject')) ?></button>
+        <button class="btn" data-cookie="accepted" type="button"><?= e(c('geral.cookie_accept')) ?></button>
     </div>
 </div>

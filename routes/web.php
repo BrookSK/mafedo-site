@@ -81,6 +81,10 @@ return function (Router $router): void {
         $router->post('/usuarios/{id}', 'Admin\\UserController@update', ['auth', 'permission:users.edit']);
         $router->post('/usuarios/{id}/excluir', 'Admin\\UserController@destroy', ['auth', 'permission:users.delete']);
 
+        // Conteúdo do site (textos e imagens de todas as páginas)
+        $router->get('/conteudo', 'Admin\\ContentController@index', ['auth', 'permission:settings.view']);
+        $router->post('/conteudo/{page}', 'Admin\\ContentController@save', ['auth', 'permission:settings.edit']);
+
         // Configurações
         $router->get('/configuracoes', 'Admin\\SettingController@index', ['auth', 'permission:settings.view']);
         $router->post('/configuracoes/geral', 'Admin\\SettingController@saveGeneral', ['auth', 'permission:settings.edit']);

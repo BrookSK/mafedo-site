@@ -80,7 +80,7 @@ final class Setting
      * Define/atualiza um valor. Se a chave estiver marcada como 'encrypted',
      * o valor é criptografado antes de persistir.
      */
-    public static function set(string $key, mixed $value): void
+    public static function set(string $key, mixed $value, string $group = 'general'): void
     {
         self::load();
         $type = self::$types[$key] ?? 'string';
@@ -100,7 +100,7 @@ final class Setting
             Database::run(
                 'INSERT INTO settings (setting_key, setting_value, type, setting_group, created_at)
                  VALUES (:k, :v, :t, :g, :c)',
-                ['k' => $key, 'v' => $stored, 't' => $type, 'g' => 'general', 'c' => date('Y-m-d H:i:s')]
+                ['k' => $key, 'v' => $stored, 't' => $type, 'g' => $group, 'c' => date('Y-m-d H:i:s')]
             );
         }
 
@@ -115,6 +115,14 @@ final class Setting
         foreach ($pairs as $key => $value) {
             self::set($key, $value);
         }
+    }
+
+    /** Remove uma chave (o site volta a usar o valor padrão). */
+    public static function forget(string $key): void
+    {
+        self::load();
+        Database::run('DELETE FROM settings WHERE setting_key = :k', ['k' => $key]);
+        unset(self::$cache[$key], self::$types[$key]);
     }
 
     public static function clearCache(): void

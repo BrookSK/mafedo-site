@@ -587,7 +587,7 @@ body.no-hero .site-header.is-solid { height: 68px; }
 .svc-row__ico svg { width: 24px; height: 24px; }
 .svc-row:hover .svc-row__ico { background: rgba(184,105,58,.1); border-color: rgba(184,105,58,.4); }
 .svc-row__title { font-family: var(--font-head); font-size: clamp(1.3rem, 2.6vw, 2rem); font-weight: 500; line-height: 1.1; letter-spacing: -.01em; }
-.svc-row__desc { color: var(--muted); font-size: .98rem; margin-top: 6px; max-width: 52ch; }
+.svc-row__desc { display: block; color: var(--muted); font-size: .98rem; margin-top: 6px; max-width: 62ch; }
 .svc-row__go {
     width: 46px; height: 46px; border: 1px solid var(--line); border-radius: 50%;
     display: grid; place-items: center; color: var(--navy); flex: none;
@@ -858,4 +858,45 @@ section[id] { scroll-margin-top: 60px; }
 }
 @media (max-width: 420px) {
     .quick-links { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   CONTEÚDO DO CLIENTE (nov/2026): números, diferenciais completos, textos
+   ========================================================================== */
+
+/* Nossa trajetória em números */
+.numbers-section { padding-block: clamp(56px, 7vw, 96px); border-bottom: 1px solid var(--line); }
+.numbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
+.number { padding: 34px 32px 6px 0; display: flex; flex-direction: column; gap: 4px; }
+.number + .number { border-left: 1px solid var(--line); padding-left: 32px; }
+.number__value { font-family: var(--font-head); font-weight: 500; font-size: clamp(2.6rem, 5vw, 3.8rem); line-height: 1; color: var(--orange); letter-spacing: -.02em; }
+.number__label { font-family: var(--font-head); font-weight: 600; font-size: 1.1rem; color: var(--navy); margin-top: 8px; }
+.number__text { color: var(--muted); font-size: .98rem; margin: 6px 0 0; max-width: 34ch; }
+
+/* Diferenciais em 3 colunas (5 itens = 3 + 2) */
+.diff-grid--3 { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.diff .muted p { margin: 0 0 .8em; }
+.diff .muted p:last-child { margin-bottom: 0; }
+.diff-grid--full .diff { padding: 34px 30px; }
+
+/* Textos com parágrafos */
+.split__content .lead + .lead { margin-top: -.2em; }
+.about-intro__body p { color: var(--muted); font-size: clamp(1.02rem, 1.4vw, 1.15rem); }
+.about-intro__body p:first-child { color: var(--ink); }
+
+/* Segmentos na página A Mafedo (links para cada segmento) */
+.segment-list a span { transition: color .2s; }
+.segment-list a:hover span { color: var(--orange); }
+
+/* Página do segmento: imagem com mesma proporção do texto */
+.split__media img { box-shadow: 0 24px 50px rgba(1,7,31,.08); }
+
+@media (max-width: 980px) {
+    .diff-grid--3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 760px) {
+    .numbers { grid-template-columns: 1fr; }
+    .number { padding: 24px 0; }
+    .number + .number { border-left: none; border-top: 1px solid var(--line); padding-left: 0; }
+    .diff-grid--3 { grid-template-columns: 1fr; }
 }

@@ -18,8 +18,8 @@ final class ContactController extends Controller
     {
         $this->view('site/contact', [
             'meta' => [
-                'title'       => 'Contato · ' . Setting::get('company_name', 'Mafedo Engenharia'),
-                'description' => 'Fale com a Mafedo Engenharia. Tire dúvidas, solicite orçamentos e converse sobre seu próximo projeto.',
+                'title'       => c('contato.seo_title') ?: 'Contato · ' . Setting::get('company_name', 'Mafedo Engenharia'),
+                'description' => c('contato.seo_description'),
             ],
             'errors' => Session::flash('errors') ?? [],
             'sent'   => Session::flash('contact_sent') ?? false,

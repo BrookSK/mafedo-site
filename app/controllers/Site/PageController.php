@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers\Site;
 
 use App\Core\Controller;
+use App\Models\Service;
 use App\Models\Setting;
 
 final class PageController extends Controller
@@ -18,9 +19,11 @@ final class PageController extends Controller
     {
         $this->view('site/about', [
             'meta' => [
-                'title'       => 'A Mafedo · ' . $this->company(),
-                'description' => 'Conheça a Mafedo Engenharia: história, propósito, valores e metodologia de trabalho.',
+                'title'       => c('sobre.seo_title') ?: 'A Mafedo · ' . $this->company(),
+                'description' => c('sobre.seo_description'),
+                'og_image'    => upload_url(c('sobre.intro_image')),
             ],
+            'services' => (new Service())->active(),
         ]);
     }
 
@@ -28,10 +31,9 @@ final class PageController extends Controller
     {
         $this->view('site/privacy', [
             'meta' => [
-                'title'       => 'Política de Privacidade · ' . $this->company(),
-                'description' => 'Política de Privacidade da ' . $this->company() . '.',
+                'title'       => c('legal.privacy_title') . ' · ' . $this->company(),
+                'description' => c('legal.privacy_title') . ' da ' . $this->company() . '.',
             ],
-            'updatedAt' => date('d/m/Y'),
         ]);
     }
 
@@ -39,10 +41,9 @@ final class PageController extends Controller
     {
         $this->view('site/terms', [
             'meta' => [
-                'title'       => 'Termos de Uso · ' . $this->company(),
-                'description' => 'Termos de Uso do site da ' . $this->company() . '.',
+                'title'       => c('legal.terms_title') . ' · ' . $this->company(),
+                'description' => c('legal.terms_title') . ' do site da ' . $this->company() . '.',
             ],
-            'updatedAt' => date('d/m/Y'),
         ]);
     }
 }

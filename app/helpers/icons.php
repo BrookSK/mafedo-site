@@ -30,7 +30,14 @@ if (!function_exists('service_icon_name')) {
     function service_icon_name(string $slugOrTitle): string
     {
         $s = strtolower($slugOrTitle);
+        // Ícone escolhido explicitamente no painel (campo "Ícone" do serviço).
+        if (isset(icon_library()[trim($s)])) {
+            return trim($s);
+        }
         return match (true) {
+            str_contains($s, 'residenc')                     => 'residencial',
+            str_contains($s, 'corporat')                     => 'corporativo',
+            str_contains($s, 'comerc')                       => 'comercial',
             str_contains($s, 'constru')                      => 'construcao',
             str_contains($s, 'reforma') || str_contains($s, 'retrofit') => 'reforma',
             str_contains($s, 'manuten')                      => 'manutencao',
@@ -60,7 +67,14 @@ if (!function_exists('icon_library')) {
             // Projeto: compasso/planta
             'projeto'      => '<path d="M12 3v6"/><path d="M12 9l-5 11"/><path d="M12 9l5 11"/><circle cx="12" cy="4" r="1.4"/>',
 
+            // Segmentos
+            'residencial'  => '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+            'corporativo'  => '<rect x="4" y="3" width="11" height="18"/><path d="M15 9h5v12h-5"/><path d="M7.5 7h4M7.5 11h4M7.5 15h4"/><path d="M3 21h18"/>',
+            'comercial'    => '<path d="M4 9l1.5-5h13L20 9"/><path d="M4 9a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0A2.7 2.7 0 0 0 20 9"/><path d="M5 11v10h14V11"/><path d="M10 21v-5h4v5"/>',
+
             // ---- Diferenciais ----
+            'logistica'    => '<path d="M2 6h11v10H2z"/><path d="M13 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+            'expertise'    => '<circle cx="12" cy="9" r="5"/><path d="M9 13.5L8 21l4-2 4 2-1-7.5"/><path d="M10.2 9l1.3 1.3L14 7.8"/>',
             'people'       => '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M15.5 14.5A5 5 0 0 1 21 20"/>',
             'gear'         => '<circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/>',
             'clock'        => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',

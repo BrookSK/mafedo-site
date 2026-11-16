@@ -22,7 +22,6 @@ final class SettingController extends Controller
             'seo'      => Setting::group('seo'),
             'whatsapp' => Setting::group('whatsapp'),
             'social'   => Setting::group('social'),
-            'home'     => Setting::group('home'),
             'tab'      => $this->request->str('tab', 'general'),
         ]);
     }

@@ -4,13 +4,15 @@ $companyName = (string) Setting::get('company_name', 'Mafedo Engenharia');
 // Padrão: logo oficial horizontal em versão clara (o header é escuro).
 $logo = (string) (Setting::get('logo_header') ?: Setting::get('company_logo') ?: '/assets/images/brand/logo-horizontal-branco.png');
 $path = rtrim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/', '/') ?: '/';
-$navItems = [
-    '/'         => 'Início',
-    '/sobre'    => 'A Mafedo',
-    '/servicos' => 'Serviços',
-    '/projetos' => 'Projetos',
-    '/contato'  => 'Contato',
-];
+// Rótulos editáveis em Painel > Textos e imagens do site > Geral > Menu.
+$navItems = array_filter([
+    '/'         => c('geral.nav_home'),
+    '/sobre'    => c('geral.nav_about'),
+    '/servicos' => c('geral.nav_services'),
+    '/projetos' => c('geral.nav_projects'),
+    '/contato'  => c('geral.nav_contact'),
+], static fn ($label) => trim($label) !== '');
+$navCta = c('geral.nav_cta');
 $isActive = static function (string $href) use ($path): string {
     if ($href === '/') return $path === '/' ? ' is-active' : '';
     return str_starts_with($path, $href) ? ' is-active' : '';
@@ -31,13 +33,15 @@ $isActive = static function (string $href) use ($path): string {
             <?php foreach ($navItems as $href => $label): ?>
                 <a class="<?= trim($isActive($href)) ?>" href="<?= e(url($href)) ?>"><?= e($label) ?></a>
             <?php endforeach; ?>
+            <?php if ($navCta !== ''): ?>
             <div class="nav__cta">
-                <a class="btn" href="<?= e(url('/contato')) ?>">Fale com a Mafedo</a>
+                <a class="btn" href="<?= e(url('/contato')) ?>"><?= e($navCta) ?></a>
             </div>
+            <?php endif; ?>
         </nav>
 
         <div class="header-cta">
-            <a class="btn" href="<?= e(url('/contato')) ?>">Fale com a Mafedo</a>
+            <?php if ($navCta !== ''): ?><a class="btn" href="<?= e(url('/contato')) ?>"><?= e($navCta) ?></a><?php endif; ?>
             <button class="nav-toggle" aria-label="Abrir menu" aria-controls="mainNav" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>

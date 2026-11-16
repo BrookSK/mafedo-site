@@ -34,8 +34,11 @@ $error = Session::flash('error');
         <nav class="sidebar__nav">
             <a class="sidebar__link<?= $path === url('admin') || rtrim($path,'/') === '/admin' ? ' is-active' : '' ?>" href="<?= e(url('admin')) ?>">Dashboard</a>
 
+            <div class="sidebar__section">Conteúdo</div>
+            <?php if (Auth::can('settings.view')): ?>
+                <a class="sidebar__link<?= $active('/admin/conteudo') ?>" href="<?= e(url('admin/conteudo')) ?>">Textos e imagens do site</a>
+            <?php endif; ?>
             <?php if (Auth::can('projects.view')): ?>
-                <div class="sidebar__section">Conteúdo</div>
                 <a class="sidebar__link<?= $active('/admin/projetos') ?>" href="<?= e(url('admin/projetos')) ?>">Projetos</a>
             <?php endif; ?>
             <?php if (Auth::can('services.view')): ?>

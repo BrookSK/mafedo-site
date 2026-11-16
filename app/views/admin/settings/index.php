@@ -7,7 +7,6 @@ $tabs = [
     'seo'      => 'SEO',
     'whatsapp' => 'WhatsApp',
     'social'   => 'Redes sociais',
-    'home'     => 'Home',
 ];
 ?>
 <div class="breadcrumbs"><a href="<?= e(url('admin')) ?>">Dashboard</a> / Configurações</div>
@@ -147,16 +146,6 @@ $tabs = [
         <div class="card__body" style="border-top:1px solid var(--border)"><button class="btn btn--primary">Salvar</button></div>
     </form>
 
-<?php elseif ($tab === 'home'): ?>
-    <form method="post" action="<?= e(url('admin/configuracoes/geral')) ?>" class="card">
-        <?= csrf_field() ?>
-        <div class="card__head">Conteúdo da Home</div>
-        <div class="card__body">
-            <p style="color:var(--text-muted)">O conteúdo editável da Home (hero e introdução) também pode ser ajustado aqui futuramente. Os campos estão preparados no banco (grupo <code>home</code>).</p>
-            <div class="chips">
-                <span class="chip">home_hero_title: <?= e(str_excerpt($home['home_hero_title'] ?? '', 40)) ?></span>
-                <span class="chip">home_hero_subtitle: <?= e(str_excerpt($home['home_hero_subtitle'] ?? '', 40)) ?></span>
-            </div>
-        </div>
-    </form>
 <?php endif; ?>
+
+<p class="hint" style="margin-top:16px;color:var(--text-muted);font-size:13px">Textos e imagens das páginas do site ficam em <a href="<?= e(url('admin/conteudo')) ?>">Textos e imagens do site</a>.</p>

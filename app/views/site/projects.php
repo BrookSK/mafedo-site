@@ -1,14 +1,14 @@
-<section class="section blueprint" style="padding-top: calc(var(--header-h) + 70px)">
+<section class="section" style="padding-top: calc(var(--header-h) + 70px)">
     <div class="container">
         <div class="sx-head reveal">
-            <div class="sx-index"><span class="sx-num">/PORTFÓLIO</span><span class="sx-line"></span><span class="sx-label">Projetos</span></div>
-            <h1>Obras e projetos da Mafedo.</h1>
-            <p class="lead">Uma seleção que representa nossa atuação em construção e reforma de alto padrão.</p>
+            <?php if (c('projetos.head_eyebrow') !== ''): ?><p class="eyebrow"><?= e(c('projetos.head_eyebrow')) ?></p><?php endif; ?>
+            <h1><?= e(c('projetos.head_title')) ?></h1>
+            <?php if (c('projetos.head_text') !== ''): ?><p class="lead"><?= nl2br(e(c('projetos.head_text'))) ?></p><?php endif; ?>
         </div>
 
-        <?php if (!empty($categories)): ?>
+        <?php if (!empty($categories) && count($categories) > 1): ?>
             <div class="filters reveal">
-                <button class="filter is-active" data-filter="all" type="button">Todos</button>
+                <button class="filter is-active" data-filter="all" type="button"><?= e(c('projetos.filter_all')) ?></button>
                 <?php foreach ($categories as $cat): ?>
                     <button class="filter" data-filter="<?= e($cat) ?>" type="button"><?= e($cat) ?></button>
                 <?php endforeach; ?>
@@ -17,8 +17,7 @@
 
         <?php if (empty($projects)): ?>
             <div class="empty-state reveal">
-                <p>O portfólio será exibido aqui assim que os projetos forem cadastrados no painel.</p>
-                <a class="btn btn--ghost-dark" href="<?= e(url('/contato')) ?>">Fale com a Mafedo</a>
+                <p><?= e(c('projetos.empty_text')) ?></p>
             </div>
         <?php else: ?>
             <div class="proj-editorial">
@@ -37,3 +36,5 @@
         <?php endif; ?>
     </div>
 </section>
+
+<?php $this->partial('site/partials/contact-band'); ?>

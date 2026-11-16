@@ -18,8 +18,8 @@ final class ProjectController extends Controller
 
         $this->view('site/projects', [
             'meta' => [
-                'title'       => 'Projetos · ' . Setting::get('company_name', 'Mafedo Engenharia'),
-                'description' => 'Portfólio de projetos realizados pela Mafedo Engenharia.',
+                'title'       => c('projetos.seo_title') ?: 'Projetos · ' . Setting::get('company_name', 'Mafedo Engenharia'),
+                'description' => c('projetos.seo_description'),
             ],
             'projects'   => $model->active($category),
             'categories' => $model->categories(),
