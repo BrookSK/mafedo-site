@@ -135,7 +135,7 @@ if (!function_exists('content_schema')) {
                         'seo_description' => $f('textarea', 'Descrição no Google', 'Há 9 anos, a Mafedo Engenharia desenvolve soluções em engenharia, construção e reformas para os segmentos residencial, corporativo e comercial. Mais de 400 projetos entregues.'),
                     ]],
                     'hero' => ['label' => 'Topo (banner principal)', 'fields' => [
-                        'hero_image'     => $f('image', 'Imagem de fundo', $img . 'residencial-living-01.jpg', 'Use uma foto horizontal, de pelo menos 1600 px de largura.'),
+                        'hero_image'     => $f('image', 'Imagem de fundo', $img . 'residencial-estar-01.jpg', 'Use uma foto horizontal, de pelo menos 1600 px de largura.'),
                         'hero_eyebrow'   => $f('text', 'Texto pequeno acima do título', 'Mafedo Engenharia'),
                         'hero_title'     => $f('text', 'Título', 'Compromisso, qualidade e confiança.'),
                         'hero_subtitle'  => $f('textarea', 'Subtítulo', 'Há 9 anos desenvolvendo soluções em engenharia, construção e reformas para os segmentos residencial, corporativo e comercial.'),
